@@ -8,6 +8,7 @@ import com.florin.restaurant.repository.UserRepository;
 import com.florin.restaurant.service.OrderService;
 import com.florin.restaurant.user.User;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class OrderTests {
         private TestEntityManager entityManager;
 
         @Test
-        public void testAddOrderItem() {
+        public void shouldAddOrderItem() {
             Menu menu = entityManager.find(Menu.class, 11);
             User user = entityManager.find(User.class, 4);
 
@@ -52,10 +53,11 @@ public class OrderTests {
             newOrderItem.setQuantity(3);
 
             OrderItem saveOrderItem = orderRepository.save(newOrderItem);
-            assertTrue(saveOrderItem.getId() > 0);
+
+            Assertions.assertTrue(saveOrderItem.getId() > 0);
         }
 
-@Test void removeItem(){
+@Test void shouldremoveItem(){
 
     Menu menu = entityManager.find(Menu.class, 11);
     User user = entityManager.find(User.class, 4);
@@ -76,7 +78,7 @@ public class OrderTests {
 
 
 @Test
-public void createCheckout(){
+public void shouldcreateCheckout(){
     User user = entityManager.find(User.class, 1);
     List<OrderItem> orderItemList=orderRepository.findByUser(user);
 
@@ -86,19 +88,19 @@ public void createCheckout(){
     checkoutOrder.setPaymentMethod("cash");
     checkoutOrder.setOrderItemList(orderItemList);
 
-    System.out.println(checkoutOrder.toString());
+    System.out.println(checkoutOrder);
 
 }
 
 
 
         @Test
-    public void testGetOrderItemByUser(){
+    public void shouldGetOrderItemByUser(){
             User user = new User();
             user.setId(1);
 
            List<OrderItem> orderItemList= orderRepository.findByUser(user);
-           assertEquals(1,orderItemList.size());
+           Assertions.assertEquals(1,orderItemList.size());
         }
     }
 

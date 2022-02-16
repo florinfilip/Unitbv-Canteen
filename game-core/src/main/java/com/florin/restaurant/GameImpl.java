@@ -12,7 +12,6 @@ import javax.annotation.PreDestroy;
 
 @Slf4j
 @Getter
-
 @Component
 public class GameImpl implements Game {
 
@@ -20,6 +19,7 @@ public class GameImpl implements Game {
 
     @Getter(AccessLevel.NONE)
     private final NumberGenerator numberGenerator;
+
 
     private final int guessCount;
 

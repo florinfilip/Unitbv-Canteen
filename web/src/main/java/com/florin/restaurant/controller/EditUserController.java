@@ -51,7 +51,6 @@ public class EditUserController {
         List<Role> roleList = roleService.findAll();
         model.addAttribute(AttributeNames.USER, userService.findUserById(id));
         model.addAttribute(AttributeNames.ROLELIST, roleList);
-
         return ViewNames.EDIT_USER;
     }
 

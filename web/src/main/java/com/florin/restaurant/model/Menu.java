@@ -30,10 +30,4 @@ public class Menu {
     @NotNull
     private Double price;
 
-
-
-
-
-
-
 }

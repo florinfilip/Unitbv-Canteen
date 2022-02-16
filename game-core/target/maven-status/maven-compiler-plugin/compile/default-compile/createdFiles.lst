@@ -1,10 +1,12 @@
 com\florin\restaurant\NumberGenerator.class
 com\florin\restaurant\GameImpl.class
+com\florin\restaurant\MessageGeneratorImpl.class
+com\florin\restaurant\NumberGeneratorImpl.class
+com\florin\restaurant\CodeGenerator.class
+com\florin\restaurant\config\GameConfig.class
 com\florin\restaurant\MinNumber.class
 com\florin\restaurant\GuessCount.class
 com\florin\restaurant\MaxNumber.class
+com\florin\restaurant\config\CodeGeneratorImpl.class
 com\florin\restaurant\Game.class
 com\florin\restaurant\MessageGenerator.class
-com\florin\restaurant\MessageGeneratorImpl.class
-com\florin\restaurant\NumberGeneratorImpl.class
-com\florin\restaurant\config\GameConfig.class

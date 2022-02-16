@@ -27,6 +27,7 @@ public class GameController {
     public String play(Model model){
         model.addAttribute(AttributeNames.MAIN_MESSAGE,gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE,gameService.getResultMessage());
+
         if(gameService.isGameOver())
             return ViewNames.GAME_OVER;
         return ViewNames.PLAY;

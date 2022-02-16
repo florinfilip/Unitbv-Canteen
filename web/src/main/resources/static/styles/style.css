@@ -21,7 +21,7 @@ body {
   color: #eee;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background:linear-gradient(to bottom,#324232,white);
+  background:linear-gradient(to bottom right,#355687,#83a7de);
   /* background-color: #60b347; */
 }
 
@@ -84,7 +84,7 @@ main {
 }
 
 h1{
-color:yellow;}
+color:#4a1b31;}
 
 .again {
   position: absolute;

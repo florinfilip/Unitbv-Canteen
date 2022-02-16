@@ -73,11 +73,12 @@ userRepository.save(user);
     }
     @Override
     public MyUserDetails getCurrentlyLoggedUser(Authentication authentication){
-    String name = authentication.getName();
-    Optional<User> userOptional = userRepository.findUserByUsername(name);
-    User loggedUser = userOptional.orElseThrow(
-            ()->new UsernameNotFoundException("No user logged found"));
-    return new MyUserDetails(loggedUser);
+        authentication= SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        Optional<User> userOptional = userRepository.findUserByUsername(name);
+        User loggedUser = userOptional.orElseThrow(
+                ()->new UsernameNotFoundException("No user logged found"));
+        return new MyUserDetails(loggedUser);
 }
 
     @Override

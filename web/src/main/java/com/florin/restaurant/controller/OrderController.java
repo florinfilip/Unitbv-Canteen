@@ -29,9 +29,6 @@ public class OrderController {
     private final OrderService orderService;
     private final IUserDetailsService userDetailsService;
 
-
-
-
     //private final MyUserDetails loggedUser=userDetailsService.getCurrentlyLoggedUser(authentication);
 
     @GetMapping(Mappings.ORDER)
@@ -40,33 +37,30 @@ public class OrderController {
 
         MyUserDetails loggedUserDetails = userDetailsService.getCurrentlyLoggedUser(authentication);
         List<OrderItem> orderItemList = orderService.findOrderByUser(loggedUserDetails.getUser());
-        model.addAttribute(AttributeNames.ORDER_ITEM_LIST,orderItemList);
+        model.addAttribute(AttributeNames.ORDER_ITEM_LIST, orderItemList);
         log.info(orderItemList.toString());
         log.info(loggedUserDetails.getUsername());
         return ViewNames.ORDER;
     }
 
-    @PostMapping(path = Mappings.ORDER+ Mappings.ADD+"/{id}/{qty}")
+    @PostMapping(path = Mappings.ORDER + Mappings.ADD + "/{id}/{qty}")
     public String addOrder(@PathVariable("id") int id,
                            @PathVariable("qty") int quantity,
-                           @AuthenticationPrincipal Authentication authentication)
-    {
+                           @AuthenticationPrincipal Authentication authentication) {
         User user = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
-        int addedQuantity = orderService.addMenuToOrder(id,quantity,user);
-        return ViewNames.REDIRECT+ViewNames.ORDER;
+        int addedQuantity = orderService.addMenuToOrder(id, quantity, user);
+        return ViewNames.REDIRECT + ViewNames.ORDER;
     }
 
 
-    @DeleteMapping(path = Mappings.ORDER+"/delete/{menuId}")
+    @DeleteMapping(path = Mappings.ORDER + "/delete/{menuId}")
     public String deleteOrder(@AuthenticationPrincipal Authentication authentication,
-                              @PathVariable("menuId") int id){
+                              @PathVariable("menuId") int id) {
 
         User user = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
+        orderService.removeOrderItem(id, user);
 
-        orderService.removeOrderItem(id,user);
-
-        return ViewNames.REDIRECT+ViewNames.ORDER;
-
+        return ViewNames.REDIRECT + ViewNames.ORDER;
     }
 }
 

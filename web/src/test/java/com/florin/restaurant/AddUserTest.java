@@ -31,7 +31,7 @@ public class AddUserTest {
 
     @Test
     @Rollback(value = false)
-    void addUser(){
+    void shouldaddUser(){
 User newUser =  new User();
 newUser.setUsername("Filipp");
 newUser.setPassword(passwordEncoder.encode("Fuin"));
@@ -43,19 +43,15 @@ assertEquals(saveUser.getId(),4);
 
     }
     @Test
-    void getRoles(){
+    void shouldgetRoles(){
         User newUser = entityManager.find(User.class,1);
 
        List<Role> roles = newUser.getRoles();
         System.out.println(roles.stream()
-                .map(role->{
-                    return role.getName();
-                })
+                .map(Role::getName)
                 .collect(Collectors.toList()));
 
     }
-
-
 
     @Test
     void getUserById(){

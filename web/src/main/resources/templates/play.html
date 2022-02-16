@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+     style="height: 100%;">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <head>
     <meta charset="UTF-8">
     <title>Guess the Number Game</title>
 </head>
-<body>
+<body
+        style="background:linear-gradient(to bottom right,#355687,#83a7de);">
     <div align="center">
         <h1>Guess the Number Game</h1>
         <h3 th:text="${mainMessage}">Main Message Content</h3>
@@ -22,6 +25,6 @@
         </footer>
 
     </div>
-    <a th:text="HOME" th:href="${'/home'}"/>
+    <a href="/home"><input class="btn btn-primary" type="button" value="Home" > </a>
 </body>
 </html>

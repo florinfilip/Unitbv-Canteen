@@ -1,6 +1,7 @@
 package com.florin.restaurant.service.Impl;
 
 
+import com.florin.restaurant.CodeGenerator;
 import com.florin.restaurant.Game;
 import com.florin.restaurant.MessageGenerator;
 import com.florin.restaurant.service.GameService;
@@ -18,7 +19,7 @@ public class GameServiceImpl implements GameService {
     private final MessageGenerator messageGenerator;
 
     @Autowired
-    public GameServiceImpl(Game game, MessageGenerator messageGenerator) {
+    public GameServiceImpl(Game game, MessageGenerator messageGenerator, CodeGenerator codeGenerator) {
         this.game = game;
         this.messageGenerator = messageGenerator;
     }
@@ -47,6 +48,8 @@ public class GameServiceImpl implements GameService {
     public String getResultMessage() {
         return messageGenerator.getResultMessage();
     }
+
+
 
     @Override
     public void checkGuess(int guess) {

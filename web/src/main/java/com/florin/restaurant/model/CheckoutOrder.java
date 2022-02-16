@@ -11,13 +11,7 @@ import java.util.List;
 public class CheckoutOrder {
 
     private int id;
-
     private String address;
-
     private String paymentMethod;
-
-
     private List<OrderItem> orderItemList;
-
-
 }

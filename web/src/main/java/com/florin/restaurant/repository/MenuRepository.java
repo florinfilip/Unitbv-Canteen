@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface MenuRepository extends JpaRepository<Menu,Integer> {
-
-
 }

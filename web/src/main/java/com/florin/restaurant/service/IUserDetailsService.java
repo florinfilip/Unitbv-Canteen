@@ -16,10 +16,15 @@ public interface IUserDetailsService extends UserDetailsService {
     }
 
     List<User> getUsers();
+
     void saveUser(User user);
+
     void deleteUser(int id);
-   void updateUser(User user);
+
+    void updateUser(User user);
+
     MyUserDetails getCurrentlyLoggedUser(Authentication authentication);
+
     boolean userExists(String username);
 
     UserDetails findUserById(int id);

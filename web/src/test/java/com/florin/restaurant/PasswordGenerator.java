@@ -10,7 +10,7 @@ public class PasswordGenerator {
 
 
     @Test
-    void generatePassword(){
+    void shouldgeneratePassword(){
         BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
         String rawPass="javaSpring";
         String encodedPass= encoder.encode(rawPass);

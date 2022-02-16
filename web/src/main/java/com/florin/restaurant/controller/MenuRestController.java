@@ -42,8 +42,6 @@ public class MenuRestController {
     return new ResponseEntity<>(menuById,HttpStatus.OK);
 }
 
-
-
 @PutMapping (Mappings.MENU)
     public ResponseEntity<Menu> updateMenu(@RequestBody Menu menu){
     Menu updatedMenu = menuService.updateMenu(menu);
@@ -60,12 +58,12 @@ public ResponseEntity<Menu> deleteMenu(@PathVariable int menuId){
 @GetMapping(Mappings.ALL)
     public ResponseEntity<List> getAllMenus(Model model){
 
-    List<Menu> menus = menuService.getMenus();
+    var menus = menuService.getMenus();
     if(menus==null){
         throw new NotFoundException("Empty table");
     }
 
-    return new ResponseEntity<List>(menus,HttpStatus.OK);
+    return new ResponseEntity<>(menus, HttpStatus.OK);
 
 }
 
