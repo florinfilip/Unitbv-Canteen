@@ -2,24 +2,23 @@ package com.florin.restaurant.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.florin.restaurant.annotations.ValidPassword;
+import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.role.Role;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
+@Builder
 @Getter
 @Setter
 @Entity
 @Table(name="user",schema = "public")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -32,6 +31,7 @@ public class User {
     private String username;
    @NotEmpty(message = "You must provide a password!")
     @ValidPassword
+    @Size(min=10, max=30)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -46,14 +46,15 @@ public class User {
     private List<Role> roles;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    public List getRoleNames(){
+    public List<String> getRoleNames(){
 
       return roles.stream()
-                .map(role->{
-                    return role.getName();
-                })
+                .map(Role::getName)
                 .collect(Collectors.toList());
     }
+
+    @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reward> rewards;
 
 
 }
