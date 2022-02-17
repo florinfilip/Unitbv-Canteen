@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class MessageGeneratorImpl implements MessageGenerator {
 
-
     private final Game game;
     private final int minNumber;
     private final CodeGenerator codeGenerator = new CodeGeneratorImpl();
@@ -29,7 +28,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
         log.info("game = {}", game);
     }
     // == public methods ==
-
 
     @Override
     public String getMainMessage() {

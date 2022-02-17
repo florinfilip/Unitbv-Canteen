@@ -19,10 +19,7 @@ public class GameImpl implements Game {
 
     @Getter(AccessLevel.NONE)
     private final NumberGenerator numberGenerator;
-
-
     private final int guessCount;
-
     private int number;
     private int smallest;
     private int biggest;
@@ -47,21 +44,12 @@ public class GameImpl implements Game {
         remainingGuesses = guessCount;
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
-
     }
-
-    @PreDestroy
-    public void preDestroy() {
-        log.info("Have a nice day!");
-    }
-
     // == public methods ==
 
     @Override
     public void check() {
-
         checkValidNumberRange();
-
         if(validNumberRange) {
             if(guess > number) {
                 biggest = guess -1;

@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class GameController {
 
-
     private final GameService gameService;
-
 
     @GetMapping(Mappings.PLAY)
     public String play(Model model){

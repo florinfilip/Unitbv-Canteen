@@ -24,15 +24,11 @@ public class GameServiceImpl implements GameService {
         this.messageGenerator = messageGenerator;
     }
 
-
-
     @PostConstruct
     public void init(){
         log.info(messageGenerator.getMainMessage());
         log.info("Number to guess is = {}", game.getNumber());
-
     }
-
 
     @Override
     public boolean isGameOver() {
@@ -49,19 +45,14 @@ public class GameServiceImpl implements GameService {
         return messageGenerator.getResultMessage();
     }
 
-
-
     @Override
     public void checkGuess(int guess) {
         game.setGuess(guess);
         game.check();
-
     }
-
 
     @Override
     public void reset() {
         game.reset();
-
     }
 }

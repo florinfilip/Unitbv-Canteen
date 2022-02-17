@@ -29,10 +29,6 @@ private UserRepository userRepository;
 private BCryptPasswordEncoder passwordEncoder;
 @Autowired
 private EntityManager entityManager;
-@Autowired
-private RoleRepository roleRepository;
-@Autowired
-private OrderRepository orderRepository;
 
     @Override
     public UserDetails loadUserByUsername( String username) throws UsernameNotFoundException {

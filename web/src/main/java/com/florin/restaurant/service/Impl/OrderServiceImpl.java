@@ -23,17 +23,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
-
     private final EntityManager entityManager;
 
-
-
     public List<OrderItem> findOrderByUser(User user){
-
         return orderRepository.findByUser(user);
     }
-
-
 
     @Override
 public int addMenuToOrder(@NotNull int id, int qty, User user){
@@ -42,8 +36,6 @@ public int addMenuToOrder(@NotNull int id, int qty, User user){
         OrderItem orderItem = orderRepository.findByUserAndMenu(user,menu);
 
         Optional<OrderItem> orderOpt=Optional.ofNullable(orderItem);
-
-
 
         if(orderItem!=null){
         qtyAdded = orderItem.getQuantity()+qty;
@@ -61,11 +53,8 @@ public int addMenuToOrder(@NotNull int id, int qty, User user){
     return qtyAdded;
 }
 
-
-
 @Override
 public List<OrderItem> getMenus(){
-
         return orderRepository.findAll();
 }
 

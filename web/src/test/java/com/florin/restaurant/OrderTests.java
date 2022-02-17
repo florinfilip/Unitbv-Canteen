@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 @Slf4j
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(false)
+@Rollback()
 public class OrderTests {
 
 
@@ -66,19 +66,13 @@ public class OrderTests {
 
     if(orderItem.getQuantity()>1){
         orderItem.setQuantity(orderItem.getQuantity()-1);
-
-    }
-
-    else
-    {
-        orderRepository.delete(orderItem);
-    }
-
+    } else
+    orderRepository.delete(orderItem);
 }
 
 
 @Test
-public void shouldcreateCheckout(){
+public void shouldCreateCheckout(){
     User user = entityManager.find(User.class, 1);
     List<OrderItem> orderItemList=orderRepository.findByUser(user);
 
@@ -91,16 +85,5 @@ public void shouldcreateCheckout(){
     System.out.println(checkoutOrder);
 
 }
-
-
-
-        @Test
-    public void shouldGetOrderItemByUser(){
-            User user = new User();
-            user.setId(1);
-
-           List<OrderItem> orderItemList= orderRepository.findByUser(user);
-           Assertions.assertEquals(1,orderItemList.size());
-        }
     }
 
