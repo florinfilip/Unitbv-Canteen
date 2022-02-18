@@ -1,13 +1,20 @@
 package com.florin.restaurant.controller;
 
 
+import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.service.GameService;
+import com.florin.restaurant.service.IUserDetailsService;
+import com.florin.restaurant.service.RewardService;
+import com.florin.restaurant.user.MyUserDetails;
+import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.AttributeNames;
 import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +27,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GameController {
 
     private final GameService gameService;
+    private final RewardService rewardService;
+    private final IUserDetailsService userDetailsService;
 
     @GetMapping(Mappings.PLAY)
-    public String play(Model model){
+    public String play(Model model,
+                       @AuthenticationPrincipal Authentication authentication){
         model.addAttribute(AttributeNames.MAIN_MESSAGE,gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE,gameService.getResultMessage());
 
-        if(gameService.isGameOver())
+        User loggedUser = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
+
+        if(gameService.isGameWon()){
+    Reward reward = gameService.getGame().getReward();
+    rewardService.saveReward(reward,loggedUser);
+            return ViewNames.GAME_OVER;
+}
+        if(gameService.isGameLost())
             return ViewNames.GAME_OVER;
         return ViewNames.PLAY;
     }

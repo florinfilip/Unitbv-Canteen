@@ -10,7 +10,6 @@ public class RewardFactory {
         User user = UserFactory.createUser();
        return Reward.builder()
                 .id(123)
-                .rewardCode("23RTHYP")
                 .user(user)
                 .build();
     }

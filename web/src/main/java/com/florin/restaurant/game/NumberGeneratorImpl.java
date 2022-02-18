@@ -1,4 +1,4 @@
-package com.florin.restaurant;
+package com.florin.restaurant.game;
 
 import lombok.AccessLevel;
 import lombok.Getter;

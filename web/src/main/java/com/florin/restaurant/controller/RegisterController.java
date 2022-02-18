@@ -18,6 +18,9 @@ import javax.swing.text.View;
 import javax.validation.Valid;
 import java.net.HttpRetryException;
 
+import static com.florin.restaurant.util.ViewNames.REDIRECT;
+import static com.florin.restaurant.util.ViewNames.REGISTER;
+
 @Controller
 @RequiredArgsConstructor
 public class RegisterController {
@@ -28,20 +31,20 @@ public class RegisterController {
     public String register(Model model){
         User user = new User();
         model.addAttribute(AttributeNames.USER, user);
-        return ViewNames.REGISTER;
+        return REGISTER;
     }
 
 
     @PostMapping(Mappings.REGISTER)
     public String saveUser(@Valid @ModelAttribute(AttributeNames.USER)  User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return ViewNames.REGISTER;
+            return REGISTER;
         }
         if(userService.userExists(user.getUsername())){
             throw new UserExistsException("Username is taken by another user! Please pick another one.");
         }
         userService.saveUser(user);
-        return ViewNames.REDIRECT+ViewNames.HOME;
+        return REDIRECT+ViewNames.HOME;
     }
 
 

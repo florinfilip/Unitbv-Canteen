@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(value = true)
+@Rollback
 public class RewardRepositoryTest {
 
     @Autowired
@@ -45,7 +45,6 @@ assertThat(userRepository.findAll().size()).isEqualTo(3);
 
     private void addRewardToDatabase() {
         Reward reward= Reward.builder()
-                .rewardCode("2HGJ4K")
                 .user(entityManager.find(User.class,1))
                 .build();
         rewardRepository.save(reward);

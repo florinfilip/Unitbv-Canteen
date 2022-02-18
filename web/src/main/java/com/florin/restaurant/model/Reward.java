@@ -1,5 +1,6 @@
 package com.florin.restaurant.model;
 
+import com.florin.restaurant.game.CodeGenerator;
 import com.florin.restaurant.user.User;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
@@ -21,7 +22,7 @@ public class Reward {
     private int id;
 
     @Column(name = "reward_code", length = 10)
-    private String rewardCode;
+    private final String rewardCode = CodeGenerator.generateRewardCode();
 
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)

@@ -2,12 +2,11 @@ package com.florin.restaurant.config;
 
 
 
-import com.florin.restaurant.GuessCount;
-import com.florin.restaurant.MaxNumber;
-import com.florin.restaurant.MinNumber;
+import com.florin.restaurant.game.GuessCount;
+import com.florin.restaurant.game.MaxNumber;
+import com.florin.restaurant.game.MinNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 

@@ -1,10 +1,10 @@
 package com.florin.restaurant.service.Impl;
 
 
-import com.florin.restaurant.CodeGenerator;
-import com.florin.restaurant.Game;
-import com.florin.restaurant.MessageGenerator;
+import com.florin.restaurant.game.Game;
+import com.florin.restaurant.game.MessageGenerator;
 import com.florin.restaurant.service.GameService;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,14 @@ import javax.annotation.PostConstruct;
 
 @Slf4j
 @Service
+@Data
 public class GameServiceImpl implements GameService {
 
     private final Game game;
     private final MessageGenerator messageGenerator;
 
     @Autowired
-    public GameServiceImpl(Game game, MessageGenerator messageGenerator, CodeGenerator codeGenerator) {
+    public GameServiceImpl(Game game, MessageGenerator messageGenerator) {
         this.game = game;
         this.messageGenerator = messageGenerator;
     }
@@ -33,6 +34,16 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean isGameOver() {
        return game.isGameWon() || game.isGameLost();
+    }
+
+    @Override
+    public boolean isGameWon() {
+        return game.isGameWon();
+    }
+
+    @Override
+    public boolean isGameLost() {
+        return game.isGameLost();
     }
 
     @Override
