@@ -8,25 +8,35 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
 
+import javax.persistence.EntityManager;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Rollback
 public class UserServiceImplTest {
 
-    @InjectMocks
-    UserDetailsServiceImpl userService;
-
-    @Mock
+    @Autowired
+    EntityManager entityManager;
+    @Autowired
     UserRepository userRepository;
-
-    @BeforeEach
-    void setup(){
-        MockitoAnnotations.initMocks(this);
-
-    }
 
     @Test
     final void testGetUser(){
         User user = UserFactory.createUser();
 
+    }
+
+    @Test
+    final void testGetRewards(){
+       userRepository.findById(1)
+               .get()
+               .getRewards()
+               .forEach(r-> System.out.println(r.getRewardCode()));
     }
 
 }

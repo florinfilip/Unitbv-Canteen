@@ -55,6 +55,4 @@ public class User {
 
     @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reward> rewards;
-
-
 }

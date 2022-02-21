@@ -1,140 +1,168 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org",
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ,
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/styles/orderPageStyle.css}" href="../static/styles/orderPageStyle.css">
 <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
 <head><title>Order List</title>
 
 </head>
 
 <body>
-<div  class="container-fluid">
+<div class="container-fluid">
     <h2> Your order</h2>
-<div class = "row m-5">
-    <div  class="col-sm-8">
-        <th:block  th:each="item, status : ${orderItemList} ">
-            <div class="row border rounded" th:with="menu = ${item.menu}">
-            <div class="col">
-                <div>[[${status.count}]]</div>
-
-                </div>
-    <div class="col-3">
-        <img th:src="${menu.url}" class="img-fluid"/>
-    </div>
-                <div class="col-6">
-                    <div>
-                        <a th:href="@{/menus/}+${menu.id}" th:title="${menu.name}" target="_blank">
-                            <b>
-                                [[${menu.name}]]
-                        </b>
-                        </a>
+    <div class="row m-5">
+        <div class="col-sm-8">
+            <th:block th:each="item, status : ${orderItemList} ">
+                <div class="menu row border rounded" th:with="menu = ${item.menu}">
+                    <div class="col-1">
+                        <div>[[${status.count}]]</div>
                     </div>
-                    <div th:replace="qty-control :: qty_control(${item.quantity},${item.menu.id})"></div>
-                <div> <span>X</span>
-                    <span>[[${menu.price}]]</span>
+                    <div class="col-3">
+                        <img th:src="${menu.url}" class="img-fluid round"/>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <a th:href="@{/menus/}+${menu.id}" th:title="${menu.name}" target="_blank">
+                                <b>
+                                    [[${menu.name}]]
+                                </b>
+                            </a>
+                        </div>
+                        <div th:replace="qty-control :: qty_control(${item.quantity},${item.menu.id})"></div>
+                        <div><span>X</span>
+                            <span>[[${menu.price}]]</span>
+                        </div>
+                        <div>
+                            <span>=</span>
+                            <span class="h4 productSubtotal">[[${item.subtotal}]]</span>
+                            <br>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span>=</span>
-                    <span class="h4 productSubtotal">[[${item.subtotal}]]</span>
-                </div>
-                </div>
+                <div class="row m-1"> &nbsp;</div>
+            </th:block>
+        </div>
+
+        <div class="col sm-4" th:unless="${#lists.isEmpty(orderItemList)}">
+            <div>
+                <span class="h3">Total:</span>
             </div>
-            <div class="row m-1"> &nbsp;</div>
-        </th:block>
-    </div>
+            <div class="mt-2">
+                <span class="h2" id="totalAmount">[Total Amount]</span>
+            </div>
+            <div class="mt-2">
 
-    <div class ="col sm-4" th:unless="${#lists.isEmpty(orderItemList)}">
-        <div>
-            <span class="h3">Total:</span>
+
+                    <form action="#"
+                          th:action="@{/checkout}"
+                          method="POST">
+
+                        <label> Enter Address:</label>
+                        <input type="text"
+                               name="address"
+                               class="form dropdown"/>
+                        <br>
+                        <label>Discount Code</label>
+                        <select id="discountCodeSelect" name="discountCode">
+                            <option value="" selected disabled hidden></option>
+                            <option th:each="reward : ${rewardList}"
+                                    th:value="${reward.rewardCode}"
+                                    th:text="${reward.rewardCode}"></option>
+                        </select>
+                        <span class="h6" id="discount"></span>
+                        <br>
+
+                        <label> Payment Method: </label>
+                        <select>
+                            style="width:200px;"
+                            class="form-select-lg mb-3"
+                            name="paymentMethod">
+
+                            <option class="dropdown-item active"
+                                    th:value="'Cash'"
+                                    th:text="Cash"></option>
+
+                            <option th:value="'Card'"
+                                    th:text="Card"></option>
+                        </select>
+
+                        <div class="col">
+                            <button class="btn btn-danger p-3 mt-2"
+                                    name="submit"
+                                    type="submit">Checkout
+                            </button>
+                        </div>
+                    </form>
+            </div>
         </div>
-        <div class="mt-2">
-            <span class="h2" id="totalAmount">[Total Amount]</span>
+        <div th:if="${#lists.isEmpty(orderItemList)}">
+            <h3> You have not chosen any products yet.</h3>
         </div>
-        <div class="mt-2">
-
-
-            <form action="#"
-                  th:action="@{/checkout}"
-
-                  method="POST">
-
-
-                <label> Enter Address:</label>
-                <input type="text"
-                       name="address"
-                       class="form dropdown"/>
-                <br>
-
-                       <label> Payment Method: </label>
-                       <select
-                               style="width:200px;"
-                               class="form-select-lg mb-3"
-                               name="paymentMethod">
-
-                    <option class="dropdown-item active"
-                            th:value="'Cash'"
-                            th:text="Cash"/>
-
-                           <option th:value="'Card'"
-                                   th:text="Card"/>
-                </select>
-
-                <div class= "col">
-                        <button class="btn btn-danger p-3 mt-2"
-                                name="submit"
-                                type="submit">Checkout</button>
-                </div>
-            </form>
     </div>
 </div>
-    <div th:if="${#lists.isEmpty(orderItemList)}">
-        <h3> You have not chosen any products yet.</h3>
-    </div>
-</div></div>
 
 <script type="text/javascript">
-$(document).ready(function(){
+    $(document).ready(function () {
 
-$(".minusButton").on("click", function(e){
-e.preventDefault();
-menuId=$(this).attr("id");
-qtyInput = $("#quantity"+menuId);
+        $(".minusButton").on("click", function (e) {
+            e.preventDefault();
+            menuId = $(this).attr("id");
+            qtyInput = $("#quantity" + menuId);
 
-newQty = parseInt(qtyInput.val())-1;
-if(newQty>0) qtyInput.val(newQty);
-});
-
-
-$(".plusButton").on("click", function(e){
-e.preventDefault();
-menuId=$(this).attr("id");
-qtyInput = $("#quantity"+menuId);
-newQty = parseInt(qtyInput.val())+1;
-if(newQty<10) qtyInput.val(newQty);
-});
+            newQty = parseInt(qtyInput.val()) - 1;
+            if (newQty > 0) qtyInput.val(newQty);
+        });
 
 
-});
+        $(".plusButton").on("click", function (e) {
+            e.preventDefault();
+            menuId = $(this).attr("id");
+            qtyInput = $("#quantity" + menuId);
+            newQty = parseInt(qtyInput.val()) + 1;
+            if (newQty < 10) qtyInput.val(newQty);
+        });
 
+
+    });
 
 
 </script>
 <!--<script  th:src="@{\js\quantityCtrl.js}"> </script>-->
 
 
-
 <script>
-    $(document).ready(function(){
-    updateTotal();
+    $(document).ready(function () {
+        updateTotal();
+        updateTotalWithDiscount();
     });
 
-    function updateTotal(){
-    total = 0.0;
-    $(".productSubtotal").each(function(index,element){
-    total = total + parseFloat(element.innerHTML);
-    });
+    function updateTotal() {
+        total = 0.0;
+        $(".productSubtotal").each(function (index, element) {
+            total = total + parseFloat(element.innerHTML);
+        });
 
-    $("#totalAmount").text("$" + total);
+        $("#totalAmount").text("$" + total);
+        return total;
+    }
+    function codeExists(){
+        let isValue = false;
+        $('#discountCodeSelect').each(function (){
+            if(this.value!=null)
+                isValue=true;
+            console.log((this.value))
+            return isValue;
+        });
+    }
+
+    function updateTotalWithDiscount() {
+        let total = updateTotal();
+        let discount = total * 0.2;
+
+        console.log(discount);
+        $("#discount").text("20% discount: " + parseFloat(discount).toFixed(2));
     }
 
 

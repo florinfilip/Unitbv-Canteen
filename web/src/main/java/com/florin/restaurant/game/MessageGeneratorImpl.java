@@ -42,7 +42,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
         if (game.isGameWon()) {
             return "You guessed it! The number was " + game.getNumber() + "!"
-                    + "\nHere is your reward code: " + game.getReward().getRewardCode();
+                    + "\nHere is your reward 20% discount code: " + game.getReward().getRewardCode();
         } else if (game.isGameLost()) {
             return "You lost. The number was " + game.getNumber();
         } else if (!game.isValidNumberRange()) {

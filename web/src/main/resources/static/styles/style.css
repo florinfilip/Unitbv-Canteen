@@ -6,7 +6,7 @@
   box-sizing: inherit;
 }
 a{
-color:white;
+color: #070000;
 font-size:150%;}
 
 html {
@@ -21,7 +21,7 @@ body {
   color: #eee;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background:linear-gradient(to bottom right,#355687,#83a7de);
+  background:linear-gradient(to bottom right, #e3e7ee, #a0aab6);
   /* background-color: #60b347; */
 }
 

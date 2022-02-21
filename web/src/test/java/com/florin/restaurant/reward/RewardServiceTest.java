@@ -1,6 +1,7 @@
 package com.florin.restaurant.reward;
 
 import com.florin.restaurant.model.Reward;
+import com.florin.restaurant.repository.RewardRepository;
 import com.florin.restaurant.service.RewardService;
 import com.florin.restaurant.user.User;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +23,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RewardServiceTest {
 
     @Autowired
-    private RewardService rewardService;
+    private RewardRepository rewardRepository;
     @Autowired
     private EntityManager entityManager;
+
+    @Test
+    void getRewards()
+    {
+        rewardRepository.findAll().forEach(a-> System.out.println(a.getRewardCode()));
+    }
 
 
 }
