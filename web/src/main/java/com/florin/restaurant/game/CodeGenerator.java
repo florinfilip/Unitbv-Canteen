@@ -1,15 +1,13 @@
-package com.florin.restaurant.config;
+package com.florin.restaurant.game;
 
-import com.florin.restaurant.CodeGenerator;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 
 import java.util.Locale;
 import java.util.Random;
 
-@Component
-public class CodeGeneratorImpl implements CodeGenerator {
-    @Override
+@UtilityClass
+public class CodeGenerator {
+
     public String generateRewardCode() {
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'

@@ -2,20 +2,18 @@ package com.florin.restaurant.config;
 
 
 
-import com.florin.restaurant.GuessCount;
-import com.florin.restaurant.MaxNumber;
-import com.florin.restaurant.MinNumber;
+import com.florin.restaurant.game.GuessCount;
+import com.florin.restaurant.game.MaxNumber;
+import com.florin.restaurant.game.MinNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan(basePackages = "com.florin.restaurant")
+//@ComponentScan(basePackages = "com.florin.restaurant")
 @PropertySource("classpath:config/game.properties")
 public class GameConfig {
-
 
     @Value("${game.maxNumber:20}")
     private int maxNumber;
@@ -25,8 +23,6 @@ public class GameConfig {
 
     @Value("${game.minNumber:5}")
     private int minNumber;
-
-
 
     @Bean
     @MaxNumber

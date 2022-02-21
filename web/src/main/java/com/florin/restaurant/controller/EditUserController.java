@@ -31,9 +31,6 @@ public class EditUserController {
     private final IUserDetailsService userService;
     private final RoleService roleService;
 
-
-
-
         @PostMapping(Mappings.USERS_SAVE)
     public String saveEdit( @ModelAttribute(AttributeNames.USER) User user, BindingResult bindingResult){
         if(bindingResult.hasErrors() ){
@@ -43,8 +40,6 @@ public class EditUserController {
 //   userService.saveUser(user);
         return ViewNames.REDIRECT+ViewNames.USERS;
     }
-
-
 
     @GetMapping("/users/{id}")
     public String editUser(@PathVariable int id, Model model){

@@ -12,6 +12,7 @@ public class CheckoutOrder {
 
     private int id;
     private String address;
+    private String discountCode;
     private String paymentMethod;
     private List<OrderItem> orderItemList;
 }

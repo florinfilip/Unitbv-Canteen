@@ -1,24 +1,22 @@
-package com.florin.restaurant;
+package com.florin.restaurant.game;
 
-import com.florin.restaurant.config.CodeGeneratorImpl;
+import com.florin.restaurant.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
 @Slf4j
+@Component
 public class MessageGeneratorImpl implements MessageGenerator {
-
 
     private final Game game;
     private final int minNumber;
-    private final CodeGenerator codeGenerator = new CodeGeneratorImpl();
-    final String code = codeGenerator.generateRewardCode();
 
     @Autowired
-    public MessageGeneratorImpl(Game game, @MinNumber int minNumber, CodeGenerator codeGenerator) {
+    public MessageGeneratorImpl(Game game,
+                                @MinNumber int minNumber) {
         this.game = game;
         this.minNumber = minNumber;
     }
@@ -29,7 +27,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
         log.info("game = {}", game);
     }
     // == public methods ==
-
 
     @Override
     public String getMainMessage() {
@@ -45,7 +42,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
         if (game.isGameWon()) {
             return "You guessed it! The number was " + game.getNumber() + "!"
-                    + "\nHere is your reward code: " + code;
+                    + "\nHere is your 20% discount code: " + game.getReward().getRewardCode();
         } else if (game.isGameLost()) {
             return "You lost. The number was " + game.getNumber();
         } else if (!game.isValidNumberRange()) {

@@ -1,4 +1,6 @@
-package com.florin.restaurant;
+package com.florin.restaurant.game;
+
+import com.florin.restaurant.model.Reward;
 
 public interface Game {
 
@@ -15,6 +17,8 @@ public interface Game {
     int getRemainingGuesses();
 
     int getGuessCount();
+
+    Reward getReward();
 
     void reset();
 

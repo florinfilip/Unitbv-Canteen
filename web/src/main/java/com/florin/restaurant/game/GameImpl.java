@@ -1,5 +1,6 @@
-package com.florin.restaurant;
+package com.florin.restaurant.game;
 
+import com.florin.restaurant.model.Reward;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,26 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 @Slf4j
 @Getter
 @Component
 public class GameImpl implements Game {
 
-    // == fields ==
-
     @Getter(AccessLevel.NONE)
     private final NumberGenerator numberGenerator;
-
-
     private final int guessCount;
-
     private int number;
     private int smallest;
     private int biggest;
+    private final Reward reward = new Reward();
     private int remainingGuesses;
     private boolean validNumberRange = true;
+
 
     @Setter
     private int guess;
@@ -38,7 +35,6 @@ public class GameImpl implements Game {
         this.guessCount = guessCount;
     }
 
-    // == init ==
     @PostConstruct
     @Override
     public void reset() {
@@ -47,35 +43,18 @@ public class GameImpl implements Game {
         remainingGuesses = guessCount;
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
-
     }
-
-    @PreDestroy
-    public void preDestroy() {
-        log.info("Have a nice day!");
-    }
-
-    // == public methods ==
 
     @Override
     public void check() {
-
         checkValidNumberRange();
-
         if(validNumberRange) {
             if(guess > number) {
-                biggest = guess -1;
-            }
-
+                biggest = guess -1;}
             if(guess < number) {
-                smallest = guess + 1;
-            }
+                smallest = guess + 1;}
         }
-
-        remainingGuesses--;
-    }
-
-
+        remainingGuesses--;}
     @Override
     public boolean isGameWon() {
         return guess == number;

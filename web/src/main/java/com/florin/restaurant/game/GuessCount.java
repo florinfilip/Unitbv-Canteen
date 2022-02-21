@@ -1,4 +1,4 @@
-package com.florin.restaurant;
+package com.florin.restaurant.game;
 
 
 import org.springframework.beans.factory.annotation.Qualifier;

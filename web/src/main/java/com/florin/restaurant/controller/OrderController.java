@@ -1,5 +1,6 @@
 package com.florin.restaurant.controller;
 
+import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.order_item.OrderItem;
 import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.service.MenuService;
@@ -20,6 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.florin.restaurant.util.AttributeNames.ORDER_ITEM_LIST;
+import static com.florin.restaurant.util.AttributeNames.REWARD_LIST;
+import static com.florin.restaurant.util.Mappings.ORDER;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -29,21 +34,19 @@ public class OrderController {
     private final OrderService orderService;
     private final IUserDetailsService userDetailsService;
 
-    //private final MyUserDetails loggedUser=userDetailsService.getCurrentlyLoggedUser(authentication);
-
-    @GetMapping(Mappings.ORDER)
+    @GetMapping(ORDER)
     public String showList(Model model,
                            @AuthenticationPrincipal Authentication authentication) {
 
         MyUserDetails loggedUserDetails = userDetailsService.getCurrentlyLoggedUser(authentication);
         List<OrderItem> orderItemList = orderService.findOrderByUser(loggedUserDetails.getUser());
-        model.addAttribute(AttributeNames.ORDER_ITEM_LIST, orderItemList);
-        log.info(orderItemList.toString());
-        log.info(loggedUserDetails.getUsername());
+        List<Reward> rewardList = loggedUserDetails.getUser().getRewards();
+        model.addAttribute(ORDER_ITEM_LIST, orderItemList);
+        model.addAttribute(REWARD_LIST, rewardList);
         return ViewNames.ORDER;
     }
 
-    @PostMapping(path = Mappings.ORDER + Mappings.ADD + "/{id}/{qty}")
+    @PostMapping(path = ORDER + Mappings.ADD + "/{id}/{qty}")
     public String addOrder(@PathVariable("id") int id,
                            @PathVariable("qty") int quantity,
                            @AuthenticationPrincipal Authentication authentication) {
@@ -53,7 +56,7 @@ public class OrderController {
     }
 
 
-    @DeleteMapping(path = Mappings.ORDER + "/delete/{menuId}")
+    @DeleteMapping(path = ORDER + "/delete/{menuId}")
     public String deleteOrder(@AuthenticationPrincipal Authentication authentication,
                               @PathVariable("menuId") int id) {
 
