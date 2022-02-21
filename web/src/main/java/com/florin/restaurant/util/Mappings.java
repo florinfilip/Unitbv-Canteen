@@ -20,6 +20,7 @@ public final class Mappings {
     public static final String USERS_ID="/user/{id}";
     public static final String USERS_SAVE ="/users/save";
     public static final String USERS_DELETE_ID="/users/delete/{id}";
+    public static final String APPLY_CODE = "apply";
 
     private Mappings() {}
 }

@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.florin.restaurant.model.Menu;
 import com.florin.restaurant.user.User;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "order_items", schema = "public")
 public class OrderItem {
@@ -25,17 +28,18 @@ public class OrderItem {
     @JoinColumn(name="user_id")
     private User user;
 
+
     @Transient
     public double getSubtotal(){
         return this.menu.getPrice() * quantity;
     }
 
-    @Transient
+@Transient
     public double getSubtotal(double discount){
         return (this.menu.getPrice() * quantity)-(this.menu.getPrice()*0.2);
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     @Transient
     public double getSubtotalWithDiscount(){
         return this.menu.getPrice() * quantity - getDiscountPerMenu();
@@ -51,4 +55,5 @@ public class OrderItem {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public double getDiscountForTotalPrice() {
         return getSubtotal()*0.2;
-}}
+}
+}

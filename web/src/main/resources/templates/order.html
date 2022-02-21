@@ -66,12 +66,15 @@
                         <br>
                         <label>Discount Code</label>
                         <select id="discountCodeSelect" name="discountCode">
-                            <option value="" selected disabled hidden></option>
+                            <option selected value=""
+                                    text=""
+                                     ></option>
                             <option th:each="reward : ${rewardList}"
                                     th:value="${reward.rewardCode}"
-                                    th:text="${reward.rewardCode}"></option>
+                                    th:text="${reward.rewardCode}"
+                                    ></option>
                         </select>
-                        <span class="h6" id="discount"></span>
+                        <span hidden class="h6" id="discount"></span>
                         <br>
 
                         <label> Payment Method: </label>
@@ -135,33 +138,54 @@
 <script>
     $(document).ready(function () {
         updateTotal();
-        updateTotalWithDiscount();
+        updateDiscount();
+        showDiscount();
     });
 
     function updateTotal() {
         total = 0.0;
+        if (codeExists()){
         $(".productSubtotal").each(function (index, element) {
             total = total + parseFloat(element.innerHTML);
+            totalWithDiscount = total - total * 0.2;
         });
+            $("#totalAmount").text("$" + totalWithDiscount);}
 
-        $("#totalAmount").text("$" + total);
+else {$(".productSubtotal").each(function (index, element) {
+            total = total + parseFloat(element.innerHTML);
+            totalWithDiscount = total - total * 0.2;});
+            $("#totalAmount").text("$" + total); }
+
         return total;
     }
+
+    function showDiscount(){
+       $("#discountCodeSelect").change(function (){
+           if(this.val!==""){
+               $("#discount").removeAttr("hidden");
+               updateTotal();
+           }
+           else{
+               $("#discount").hide();
+           }
+       })
+    }
+
+
     function codeExists(){
         let isValue = false;
         $('#discountCodeSelect').each(function (){
-            if(this.value!=null)
-                isValue=true;
-            console.log((this.value))
-            return isValue;
+            if(this.value!=="")
+            {isValue=true;
+            return isValue;}
         });
+        return isValue;
     }
 
-    function updateTotalWithDiscount() {
+    function updateDiscount() {
         let total = updateTotal();
         let discount = total * 0.2;
 
-        console.log(discount);
         $("#discount").text("20% discount: " + parseFloat(discount).toFixed(2));
     }
 

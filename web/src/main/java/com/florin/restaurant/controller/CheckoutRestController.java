@@ -9,6 +9,7 @@ import com.florin.restaurant.service.OrderService;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.AttributeNames;
 import com.florin.restaurant.util.Mappings;
+import com.florin.restaurant.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,17 @@ public class CheckoutRestController {
 
         return new ResponseEntity(checkoutOrder, HttpStatus.OK);
     }
+//    @PostMapping(Mappings.APPLY_CODE)
+//    public String checkIfCodeIsValid(@ModelAttribute(AttributeNames.CHECKOUT_ORDER) CheckoutOrder checkoutOrder
+//    ,@AuthenticationPrincipal Authentication authentication ){
+//        User user=userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
+//        List<OrderItem> orderItemList = orderService.findOrderByUser(user);
+//        checkoutOrder.setOrderItemList(orderItemList);
+//        userHasValidCode(checkoutOrder,user);
+//
+//        return ViewNames.REDIRECT+ViewNames.ORDER;
+//
+//    }
 
     private void applyDiscountCode(CheckoutOrder checkoutOrder, User user) {
         //         checkoutOrder.getOrderItemList().forEach(item->item.getMenu()
