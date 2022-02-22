@@ -7,8 +7,8 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 
 @Slf4j
 @Getter
@@ -24,7 +24,9 @@ public class GameImpl implements Game {
     private final Reward reward = new Reward();
     private int remainingGuesses;
     private boolean validNumberRange = true;
-
+    private LocalDate lastPlayedOn;
+    @Setter
+    private boolean isGameTime= true;
 
     @Setter
     private int guess;
@@ -33,6 +35,7 @@ public class GameImpl implements Game {
     public GameImpl(NumberGenerator numberGenerator, @GuessCount int guessCount) {
         this.numberGenerator = numberGenerator;
         this.guessCount = guessCount;
+        this.lastPlayedOn= LocalDate.now();
     }
 
     @PostConstruct
@@ -55,6 +58,7 @@ public class GameImpl implements Game {
                 smallest = guess + 1;}
         }
         remainingGuesses--;}
+
     @Override
     public boolean isGameWon() {
         return guess == number;
@@ -65,7 +69,6 @@ public class GameImpl implements Game {
         return !isGameWon() && remainingGuesses <= 0;
     }
 
-    // == private methods ==
     private void checkValidNumberRange() {
         validNumberRange = (guess >= smallest) && (guess <= biggest);
     }
