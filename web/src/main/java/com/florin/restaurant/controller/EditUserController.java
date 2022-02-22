@@ -1,7 +1,4 @@
 package com.florin.restaurant.controller;
-
-
-
 import com.florin.restaurant.role.Role;
 import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.service.RoleService;
@@ -23,7 +20,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
 @RequiredArgsConstructor
 public class EditUserController {
@@ -33,11 +29,9 @@ public class EditUserController {
 
         @PostMapping(Mappings.USERS_SAVE)
     public String saveEdit( @ModelAttribute(AttributeNames.USER) User user, BindingResult bindingResult){
-        if(bindingResult.hasErrors() ){
+        if(bindingResult.hasErrors()){
             return ViewNames.EDIT_USER;
         }
-
-//   userService.saveUser(user);
         return ViewNames.REDIRECT+ViewNames.USERS;
     }
 
@@ -45,11 +39,11 @@ public class EditUserController {
     public String editUser(@PathVariable int id, Model model){
         List<Role> roleList = roleService.findAll();
         model.addAttribute(AttributeNames.USER, userService.findUserById(id));
-        model.addAttribute(AttributeNames.ROLELIST, roleList);
+        model.addAttribute(AttributeNames.ROLE_LIST, roleList);
         return ViewNames.EDIT_USER;
     }
 
-@DeleteMapping(Mappings.USERS_DELETE_ID)
+    @DeleteMapping(Mappings.USERS_DELETE_ID)
     public String deleteUser(@PathVariable int id){
             userService.deleteUser(id);
             return ViewNames.REDIRECT+ViewNames.USERS;

@@ -1,15 +1,18 @@
 package com.florin.restaurant.service.Impl;
 
-
 import com.florin.restaurant.game.Game;
 import com.florin.restaurant.game.MessageGenerator;
 import com.florin.restaurant.service.GameService;
+import com.florin.restaurant.user.User;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,7 +31,13 @@ public class GameServiceImpl implements GameService {
     @PostConstruct
     public void init(){
         log.info(messageGenerator.getMainMessage());
-        log.info("Number to guess is = {}", game.getNumber());
+    }
+
+    @Override
+    public boolean isGameTime(User user) {
+        Optional<LocalDate> optionalLastPlayed=Optional.ofNullable(user.getLastPlayed());
+        LocalDate lastPlayed = optionalLastPlayed.orElse(LocalDate.of(2021,01,01));
+       return lastPlayed.compareTo(LocalDate.now()) < 0;
     }
 
     @Override
@@ -47,8 +56,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public String getMainMessage() {
+    public String getMainMessage(User user) {
+        if(isGameTime(user))
        return messageGenerator.getMainMessage();
+        return String.format("You already had your discount code on: %s! Come back next week for more deals!",user.getLastPlayed());
     }
 
     @Override

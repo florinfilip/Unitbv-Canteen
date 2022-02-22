@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class User {
     private String username;
    @NotEmpty(message = "You must provide a password!")
     @ValidPassword
-    @Size(min=10, max=30)
+//    @Size(min=5, max=30)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -45,9 +46,11 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Role> roles;
 
+    @JoinColumn(name="last_played")
+    private LocalDate lastPlayed;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public List<String> getRoleNames(){
-
       return roles.stream()
                 .map(Role::getName)
                 .collect(Collectors.toList());

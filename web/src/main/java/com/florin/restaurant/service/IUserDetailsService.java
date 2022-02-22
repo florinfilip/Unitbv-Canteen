@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IUserDetailsService extends UserDetailsService {
@@ -28,5 +29,4 @@ public interface IUserDetailsService extends UserDetailsService {
     boolean userExists(String username);
 
     UserDetails findUserById(int id);
-
 }

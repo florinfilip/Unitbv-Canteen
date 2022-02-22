@@ -12,18 +12,13 @@
     <div align="center">
         <h1>Guess the Number Game</h1>
         <h3 th:text="${mainMessage}">Main Message Content</h3>
-        <h3 th:text="${resultMessage}">Result Message Content</h3>
+        <h3 th:if="${gameService.isGameTime(user)}" th:text="${resultMessage}">Result Message Content</h3>
 
-        <form action="play" method="post">
+        <form th:if="${gameService.isGameTime(user)}"action="play" method="post">
             <label for="guess">Enter your guess</label>
             <input id="guess" type="number" name="guess"/>
             <input type="submit" value="Submit"/>
         </form>
-
-        <footer>
-            <p>Guess the number</p>
-        </footer>
-
     </div>
     <a href="/home"><input class="btn btn-primary" type="button" value="Home" > </a>
 </body>

@@ -20,11 +20,10 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
     public boolean isValid(String password, ConstraintValidatorContext context) {
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
 
-                new LengthRule(10, 100),
+//                new LengthRule(5, 30),
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),
                 new CharacterRule(EnglishCharacterData.LowerCase, 1),
                 new CharacterRule(EnglishCharacterData.Digit, 1),
-                new CharacterRule(EnglishCharacterData.Special, 1),
                 new WhitespaceRule()
         ));
         RuleResult result = validator.validate(new PasswordData(password));
@@ -40,12 +39,6 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
                 .disableDefaultConstraintViolation();
         return false;
 
-//        Finally, we validated the password and returned true if it passes all conditions.
-//        If some conditions fail, we aggregated all the failed condition's error messages in a String separated by ","
-//        and then put it into the context and returned false.
-
     }
-
-
     }
 

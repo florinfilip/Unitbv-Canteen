@@ -53,8 +53,6 @@
                 <span class="h2" id="totalAmount">[Total Amount]</span>
             </div>
             <div class="mt-2">
-
-
                     <form action="#"
                           th:action="@{/checkout}"
                           method="POST">
@@ -76,7 +74,6 @@
                         </select>
                         <span hidden class="h6" id="discount"></span>
                         <br>
-
                         <label> Payment Method: </label>
                         <select>
                             style="width:200px;"
@@ -86,7 +83,6 @@
                             <option class="dropdown-item active"
                                     th:value="'Cash'"
                                     th:text="Cash"></option>
-
                             <option th:value="'Card'"
                                     th:text="Card"></option>
                         </select>
@@ -118,7 +114,6 @@
             if (newQty > 0) qtyInput.val(newQty);
         });
 
-
         $(".plusButton").on("click", function (e) {
             e.preventDefault();
             menuId = $(this).attr("id");
@@ -126,14 +121,9 @@
             newQty = parseInt(qtyInput.val()) + 1;
             if (newQty < 10) qtyInput.val(newQty);
         });
-
-
     });
 
-
 </script>
-<!--<script  th:src="@{\js\quantityCtrl.js}"> </script>-->
-
 
 <script>
     $(document).ready(function () {
@@ -149,28 +139,27 @@
             total = total + parseFloat(element.innerHTML);
             totalWithDiscount = total - total * 0.2;
         });
-            $("#totalAmount").text("$" + totalWithDiscount);}
+            $("#totalAmount").text(parseFloat(totalWithDiscount).toFixed(2)+" Lei");}
 
 else {$(".productSubtotal").each(function (index, element) {
             total = total + parseFloat(element.innerHTML);
-            totalWithDiscount = total - total * 0.2;});
-            $("#totalAmount").text("$" + total); }
-
+});
+            $("#totalAmount").text(parseFloat(total).toFixed(2) + " Lei"); }
         return total;
     }
 
     function showDiscount(){
-       $("#discountCodeSelect").change(function (){
-           if(this.val!==""){
-               $("#discount").removeAttr("hidden");
-               updateTotal();
-           }
-           else{
-               $("#discount").hide();
-           }
-       })
+        $("#discountCodeSelect").change(function (){
+            if(codeExists()){
+                $("#discount").removeAttr("hidden");
+                updateTotal();
+            }
+            else{
+                updateTotal();
+                $("#discount").attr('hidden',true);
+            }
+        })
     }
-
 
     function codeExists(){
         let isValue = false;
@@ -189,9 +178,7 @@ else {$(".productSubtotal").each(function (index, element) {
         $("#discount").text("20% discount: " + parseFloat(discount).toFixed(2));
     }
 
-
 </script>
-
 <a th:text="HOME" th:href="${'/home'}"/>
 <a th:text="Menus" th:href="${'/menus/list'}"/>
 </body>

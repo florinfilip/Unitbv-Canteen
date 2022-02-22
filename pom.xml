@@ -7,7 +7,6 @@
         <module>game-core</module>
     </modules>
     <parent>
-
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.5</version>
@@ -22,6 +21,35 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
-
-
+<dependencies>
+    <dependency>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>2.13</version>
+    </dependency>
+</dependencies>
+<build>
+    <plugins>
+    <plugin>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <dependencies>
+            <dependency>
+                <artifactId>google-java-format</artifactId>
+                <groupId>com.google.googlejavaformat</groupId>
+                <version>1.7</version>
+            </dependency>
+        </dependencies>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>format</goal>
+                </goals>
+                <phase>process-sources</phase>
+            </execution>
+        </executions>
+        <groupId>com.coveo</groupId>
+        <version>2.9.1</version>
+    </plugin>
+</plugins>
+</build>
 </project>

@@ -1,6 +1,5 @@
 package com.florin.restaurant.game;
 
-import com.florin.restaurant.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,12 +20,10 @@ public class MessageGeneratorImpl implements MessageGenerator {
         this.minNumber = minNumber;
     }
 
-    // == init ==
     @PostConstruct
     public void init() {
         log.info("game = {}", game);
     }
-    // == public methods ==
 
     @Override
     public String getMainMessage() {
@@ -55,7 +52,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
             if (game.getGuess() < game.getNumber()) {
                 direction = "Higher";
             }
-
             return direction + "! You have " + game.getRemainingGuesses() + " guess left";
         }
     }
