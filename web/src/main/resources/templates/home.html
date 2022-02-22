@@ -14,7 +14,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
 
-     <link rel="stylesheet"
+     <link th:rel="stylesheet"
+           rel="stylesheet"
+           th:href="@{/styles/homeStyle.css}"
            href="../static/styles/homeStyle.css">
           
 
@@ -25,20 +27,17 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 <body>
-    <div id="divWithBackground">
 
-
-    </div>
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
     
-    <a href="#"
+    <a href="https://www.unitbv.ro"
        class="navbar-brand mb-0 h1">
        <img class="d-inline-block align-top"
-       src="../static/pics/unitbv.png"
+       th:src="@{/pics/unitbv.png}"
        width="30"
        height="30"/>
-    NavBar
     </a>
+    <a class="navbar-brand mb-0 h1">UnitBv Canteen</a>
     <button 
     type="button"
     data-bs-toggle="collapse"
@@ -55,28 +54,41 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
          id="navbarNav">
          <ul class="navbar-nav">
              <li class="nav-item active">
-                 <a href="#" class="nav-link active">
+                 <a th:href="${'/menus'+'/list'}" class="nav-link active">
                      Home
                  </a>
              </li>
              <li class="nav-item active">
-                <a href="#" class="nav-link">
+                <a th:href="${'/menus'+'/list'}" class="nav-link">
                     Menus
                 </a>
             </li>
             <li class="nav-item active">
-                <a href="#" class="nav-link">
+                <a th:href="${'/order'}" class="nav-link">
                     Checkout
                 </a>
             </li>
             <li class="nav-item active">
-                <a href="https://www.unitbv.ro/documente/despre-unitbv/regulamente-hotarari/regulamentele-universitatii/servicii/Regulamentul_de_functionare_a_cantinelor-restaurant_studentesti_16.05.2016.pdf" class="nav-link">
+                <a class="nav-link"
+                 href="https://www.unitbv.ro/documente/despre-unitbv/regulamente-hotarari/regulamentele-universitatii/servicii/Regulamentul_de_functionare_a_cantinelor-restaurant_studentesti_16.05.2016.pdf">
                     Regulament
                 </a>
             </li>
+        </li>
+        <li class="nav-item active">
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="${'/admin'}" 
+            class="nav-link">
+                Admin
+            </a>
+        </li>
          </ul>
 </div>
 </nav>
+
+<div id="mainContainer">
+
+
+</div>
 
 
 
