@@ -10,7 +10,8 @@ public final class AttributeNames {
     public static final String ORDER_ITEM_LIST="orderItemList";
     public static final String REWARD_LIST="rewardList";
     public static final String USER="user";
-    public static final String ROLELIST = "roleList";
+    public static final String ROLE_LIST = "roleList";
+    public static final String GAME_SERVICE="gameService";
 
     private AttributeNames() {}
 }

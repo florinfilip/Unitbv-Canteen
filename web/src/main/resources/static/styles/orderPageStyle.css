@@ -1,0 +1,12 @@
+
+.menu{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.round{
+    border-radius: 20%;
+    float: left;
+    width:  150px;
+    height: 150px;
+    object-fit: cover;
+}

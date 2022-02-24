@@ -1,0 +1,15 @@
+.navbar{
+    width: 200;
+}
+
+body{
+    background-image: url("../pics/background.jpg");
+    background-color: green;
+}
+
+#mainContainer{
+    position:relative;
+    background-color: black;
+    height: 300;
+    width: 300;
+}

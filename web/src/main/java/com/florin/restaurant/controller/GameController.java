@@ -1,6 +1,5 @@
 package com.florin.restaurant.controller;
 
-
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.service.GameService;
 import com.florin.restaurant.service.IUserDetailsService;
@@ -20,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.time.LocalDate;
+import static com.florin.restaurant.util.AttributeNames.*;
 
 @Slf4j
 @Controller
@@ -33,29 +34,30 @@ public class GameController {
     @GetMapping(Mappings.PLAY)
     public String play(Model model,
                        @AuthenticationPrincipal Authentication authentication){
-        model.addAttribute(AttributeNames.MAIN_MESSAGE,gameService.getMainMessage());
-        model.addAttribute(AttributeNames.RESULT_MESSAGE,gameService.getResultMessage());
-
         User loggedUser = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
+
+        model.addAttribute(MAIN_MESSAGE, gameService.getMainMessage(loggedUser));
+        model.addAttribute(RESULT_MESSAGE, gameService.getResultMessage());
+        model.addAttribute(GAME_SERVICE, gameService);
+        model.addAttribute(USER, loggedUser);
 
         if(gameService.isGameWon()){
     Reward reward = gameService.getGame().getReward();
     rewardService.saveReward(reward,loggedUser);
+            loggedUser.setLastPlayed(LocalDate.now());
+            userDetailsService.updateUser(loggedUser);
             return ViewNames.GAME_OVER;
 }
         if(gameService.isGameLost())
-            return ViewNames.GAME_OVER;
+        { loggedUser.setLastPlayed(LocalDate.now());
+            userDetailsService.updateUser(loggedUser);
+            return ViewNames.GAME_OVER;}
         return ViewNames.PLAY;
     }
 
     @PostMapping(Mappings.PLAY)
     public String processMessage(@RequestParam int guess){
-
         gameService.checkGuess(guess);
         return Mappings.REDIRECT_PLAY;
     }
-
-
-
-
 }
