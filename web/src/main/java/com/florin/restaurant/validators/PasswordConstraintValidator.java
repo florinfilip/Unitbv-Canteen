@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword,String> {
-
     @Override
     public void initialize(ValidPassword constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);

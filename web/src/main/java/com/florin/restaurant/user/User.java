@@ -38,12 +38,17 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="user_roles",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-            )
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "user_id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "role_id"
+            ))
     private List<Role> roles;
 
     @JoinColumn(name="last_played")
@@ -56,6 +61,19 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true,mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reward> rewards;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                ", lastPlayed=" + lastPlayed +
+                ", rewards=" + rewards +
+                '}';
+    }
 }
