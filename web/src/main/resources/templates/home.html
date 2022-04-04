@@ -28,16 +28,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <body>
 
-<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-    
-    <a href="https://www.unitbv.ro"
-       class="navbar-brand mb-0 h1">
-       <img class="d-inline-block align-top"
-       th:src="@{/pics/unitbv.png}"
-       width="30"
-       height="30"/>
-    </a>
-    <a class="navbar-brand mb-0 h1">UnitBv Canteen</a>
+<nav class="navbar navText fixed-top navbar-expand-sm navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand d-lg-none" href="#">
+        <img class="d-inline-block align-top ms-auto"
+        th:src="@{/pics/unitbv.png}"
+        width="30"
+        height="30"
+        id="logo"/> UnitBv Canteen</a>
+   
     <button 
     type="button"
     data-bs-toggle="collapse"
@@ -49,25 +47,38 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     >
     <span class="navbar-toggler-icon"></span>
     </button>
-    <div 
-    class="collapse navbar-collapse" 
+    <div class="collapse navbar-collapse" 
          id="navbarNav">
-         <ul class="navbar-nav">
+         <ul class="navbar-nav  mb-2 mb-lg-0">
              <li class="nav-item active">
-                 <a th:href="${'/menus'+'/list'}" class="nav-link active">
+                 <a th:href="${'/home'}" class="nav-link active">
                      Home
                  </a>
              </li>
              <li class="nav-item active">
                 <a th:href="${'/menus'+'/list'}" class="nav-link">
-                    Menus
+                    Menus    
                 </a>
             </li>
-            <li class="nav-item active">
-                <a th:href="${'/order'}" class="nav-link">
-                    Checkout
-                </a>
-            </li>
+        
+            <a href="https://www.unitbv.ro"
+       class="d-none d-lg-block navbar-brand mb-0 h1">
+       &nbsp;&nbsp;
+
+       <img class="d-inline-block align-top ms-auto"
+       th:src="@{/pics/unitbv.png}"
+       width="30"
+       height="30"
+       id="logo"/>
+
+    </a>
+     <a class="d-none d-lg-block navbar-brand mb-0 h1">UnitBv Canteen</a>
+
+    <li class="nav-item active">
+        <a th:href="${'/order'}" class="nav-link">
+            Checkout
+        </a>
+    </li>
             <li class="nav-item active">
                 <a class="nav-link"
                  href="https://www.unitbv.ro/documente/despre-unitbv/regulamente-hotarari/regulamentele-universitatii/servicii/Regulamentul_de_functionare_a_cantinelor-restaurant_studentesti_16.05.2016.pdf">
@@ -75,66 +86,82 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                 </a>
             </li>
         </li>
-        <li class="nav-item active">
+        <!-- <li class="nav-item active">
             <a sec:authorize="hasAuthority('ADMIN')" th:href="${'/admin'}" 
             class="nav-link">
                 Admin
             </a>
-        </li>
-         </ul>
+        </li> -->
+    </ul>
+
+
+         <ul id="userNavBar" class="navbar-nav mx-auto">
+
+            <li class="nav-item dropdown">
+                <a sec:authorize="isAuthenticated()" id="user" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span sec:authentication="name">Username</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li>
+                        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                        <button class="dropdown-item" href="#" type="submit" th:value="Logout">LogOut</button></form>
+                    </li>
+                    <li>
+                        <a sec:authorize="hasAuthority('ADMIN')"th:href="${'/admin'}">
+                        <button class="dropdown-item" type="submit">Admin</button></a>
+                    </li>
+                   
+        
 </div>
 </nav>
 
-<div id="mainContainer">
+<div class="position-static start-0 end-50 box">
 
-
+    <div align="center" class="home child">
+        <div sec:authorize="isAuthenticated()">
+             <h1 class="welcomeText">Welcome to the Canteen, <span sec:authentication="name">Username</span>!</h1>
+     </div>
+        <h1 sec:authorize="isAnonymous()" class="welcomeText">Welcome to our Canteen!</h1>
+     </div>
+     <br><br><br><br>
+     <div align="center">
+        <br><br><br><br>
+        <a sec:authorize="isAuthenticated()"
+           th:href="play" ><a th:href="play" >
+            <button class="button" style="vertical-align:middle" >
+                <span id="gameText">Play and get a discount!</span></button></a>
+        <br></a>
+     
+        <div  sec:authorize="isAnonymous()">
+            <a th:href="register" >
+                <button class="button" style="vertical-align:middle" >
+                    <span id="gameText">Create account to play our game and get a discount!</span></button></a>
+            <br>
+            <a th:href="login" ><button class="button" style="vertical-align:middle" >
+                <span id="gameText">Or log in here</span></button></a></div>
+     </div>
+     
+     <!-- <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+        <button class="button" type="submit" th:value="Logout">
+     
+      </form> -->
+     
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+             crossorigin="anonymous"></script>
 </div>
 
+<!-- <div class="locations">
+   <div class="row">
+       <div class="col"></div>
+       <div class="col"><h1> Accurate Locations: </h1></div>
+       <div class="col"></div>
+   </div>
+   <div class="row">
+     <div class="col"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44643.834104985595!2d25.537634418515676!3d45.625922179864006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35b49a185c475%3A0x36200ed48bb95c8c!2sCantina%20Universit%C4%83%C8%9Bii%20Transilvania!5e0!3m2!1sro!2sro!4v1646754656842!5m2!1sro!2sro" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+     <div class="col"></div>
+     <div class="col"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.825546180572!2d25.59413191577147!3d45.65432502875747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35b48b4537e37%3A0x2d8689b27956c531!2sColina%20universit%C4%83%C8%9Bii!5e0!3m2!1sro!2sro!4v1646754713003!5m2!1sro!2sro" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+</div> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div align="center">-->
-<!--    <div sec:authorize="isAuthenticated()">-->
-<!--         <h1>Welcome to the Canteen, <span sec:authentication="name">Username</span>!</h1>-->
-<!--</div>-->
-<!--    <h1 sec:authorize="isAnonymous()">Welcome to our Canteen!</h1>-->
-<!--</div>-->
-<!--<br><br><br><br>-->
-<!--<div align="center">-->
-<!--    <a th:href="${'/menus'+'/list'}">Menus</a>-->
-<!--    <br><br>-->
-<!--    <a th:href="${'/order'}">Order Cart</a>-->
-<!--    <br><br>-->
-<!--    <a sec:authorize="hasAuthority('ADMIN')" th:href="${'/admin'}">Admin</a>-->
-<!--    <br><br><br><br>-->
-<!--    <a sec:authorize="isAuthenticated()"-->
-<!--       th:href="play" >Play to get a discount!</a>-->
-
-<!--    <div  sec:authorize="isAnonymous()">-->
-<!--        <a th:href="register" >Create account to play our game and get a discount!</a>-->
-<!--        <br>-->
-<!--        <a th:href="login" >Or Log in here</a></div>-->
-<!--</div>-->
-
-<!--<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">-->
-<!--    <input class="btn btn-warning" type="submit" th:value="Logout">-->
-
-<!--</form>-->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
 </body>
 </html>

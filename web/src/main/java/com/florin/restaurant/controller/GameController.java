@@ -40,13 +40,13 @@ public class GameController {
         model.addAttribute(RESULT_MESSAGE, gameService.getResultMessage());
         model.addAttribute(GAME_SERVICE, gameService);
         model.addAttribute(USER, loggedUser);
-
         if(gameService.isGameWon()){
     Reward reward = gameService.getGame().getReward();
     rewardService.saveReward(reward,loggedUser);
             loggedUser.setLastPlayed(LocalDate.now());
             userDetailsService.updateUser(loggedUser);
             return ViewNames.GAME_OVER;
+
 }
         if(gameService.isGameLost())
         { loggedUser.setLastPlayed(LocalDate.now());

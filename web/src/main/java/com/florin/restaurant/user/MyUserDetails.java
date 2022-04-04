@@ -22,12 +22,16 @@ public class MyUserDetails implements UserDetails {
     public MyUserDetails(User user) {
         this.user = user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream()
                 .map(role->new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
+    public int getId(){return this.user.getId();}
+
     public User getUser(){
         return this.user;
     }

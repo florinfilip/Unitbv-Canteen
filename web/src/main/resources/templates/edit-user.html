@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
 <head>
@@ -15,7 +15,7 @@
 <form th:action="@{/users/save}" method="post"
       style="max-width:600px; margin: 0 auto;"
       th:object="${user}">
-    <input type="hidden" th:field="*{user.id}"/>
+    <input class="form-control" hidden type="text" th:value="${user.id}" th:field="*{id}"/>
     <div class="m-3">
         <div class="form-group row">
             <label class="col-form-label col-4">Username</label>
@@ -28,7 +28,12 @@
         <div class="form-group row">
             <label class="col-form-label col-4">Password</label>
             <div class="col-8">
-                <input th:value="${user.password}" class="form-control" th:field="*{password}"
+                <input 
+                type="text"
+                name="password"
+                placeholder="Enter Here A New Password If Desired" 
+                class="form-control" 
+                
                        />
             </div>
         </div>
@@ -44,15 +49,17 @@
         <div class="form-group row">
             <label class="col-form-label col-4">Roles</label>
             <div class="col-8">
-                <th:block th:each="role:${roleList}">
-                <input type="checkbox"  th:field="*{user.roles}"
+               <th:block th:each="role:${roleList}">
+                <input type="checkbox"
+                       name="roles"
+                       th:field="*{roles}"
                        th:value="${role.id}"
                        th:text="${role.name}" class="m-2"/>
-                </th:block>
+               </th:block>
             </div>
         </div>
         <div>
-        <button type="submit" class="btn btn-primary">Update</button>
+            <button class="btn btn-primary" href="#" type="submit" th:value="Update">Update</button>
     </div>
 </div>
 </form>

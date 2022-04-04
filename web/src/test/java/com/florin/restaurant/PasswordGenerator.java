@@ -12,11 +12,17 @@ public class PasswordGenerator {
     @Test
     void shouldgeneratePassword(){
         BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
-        String rawPass="javaSpring";
+        String rawPass="endava";
         String encodedPass= encoder.encode(rawPass);
         System.out.println(encodedPass);
+    }
 
-
+    @Test
+    void givenSamePasswordAndEncodedPasswordShouldReturnTrue(){
+        BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
+        String rawPass="endava";
+        String encodedPass= encoder.encode(rawPass);
+        assertThat(encoder.matches(rawPass,encodedPass),is(true));
     }
 
 

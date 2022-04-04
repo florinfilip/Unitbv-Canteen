@@ -28,17 +28,15 @@ public class OrderItem {
     @JoinColumn(name="user_id")
     private User user;
 
-
     @Transient
     public double getSubtotal(){
         return this.menu.getPrice() * quantity;
     }
 
-@Transient
+    @Transient
     public double getSubtotal(double discount){
         return (this.menu.getPrice() * quantity)-(this.menu.getPrice()*0.2);
     }
-
 
     @Transient
     public double getSubtotalWithDiscount(){

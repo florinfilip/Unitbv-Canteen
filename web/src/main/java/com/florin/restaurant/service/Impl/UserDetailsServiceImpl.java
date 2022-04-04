@@ -1,8 +1,5 @@
 package com.florin.restaurant.service.Impl;
 
-
-import com.florin.restaurant.repository.OrderRepository;
-import com.florin.restaurant.repository.RoleRepository;
 import com.florin.restaurant.repository.UserRepository;
 import com.florin.restaurant.role.Role;
 import com.florin.restaurant.service.IUserDetailsService;
@@ -16,9 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements IUserDetailsService {
@@ -51,7 +50,7 @@ private EntityManager entityManager;
     }
     @Override
     public void saveUser(User user){
-        User newUser=new User();
+        User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
@@ -61,8 +60,20 @@ private EntityManager entityManager;
     }
     @Override
     public void updateUser(User user){
-userRepository.save(user);
+        User newUser=userRepository.findById(user.getId()).get();
+        newUser.setId(user.getId());
+        newUser.setUsername(user.getUsername());
+        if(!passwordEncoder.matches(user.getPassword(), newUser.getPassword())
+        && !Objects.equals(user.getPassword(),newUser.getPassword()))
+        { newUser.setPassword(passwordEncoder.encode(user.getPassword())); }
+        System.out.println(user.getPassword());
+        System.out.println(newUser.getPassword());
+        newUser.setEnabled(user.isEnabled());
+        newUser.setRoles(user.getRoles());
+
+        userRepository.save(newUser);
     }
+
     @Override
     public void deleteUser(int id){
         userRepository.findById(id).get().setRoles(null);

@@ -1,15 +1,99 @@
-.navbar{
-    width: 200;
-}
 
-body{
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
+
+html, body{position:relative;
     background-image: url("../pics/background.jpg");
-    background-color: green;
+    background-color:rgba(248,247,216,0.7);
+    font-family:sans-serif;
+    height: 100%;
 }
 
-#mainContainer{
-    position:relative;
-    background-color: black;
-    height: 300;
-    width: 300;
+
+.home-child{
+    margin-top: 20%;
 }
+
+.box{
+    position:absolute;
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(to left top, rgba(5, 6, 8, 0.8),rgba(22, 19, 22, 0.9));
+    box-shadow:0 5px 15px rgba(0,0,0,1);
+    margin: 0 auto;
+}
+.locations{
+    width:auto;
+    background:rgb(2, 2, 2)
+    
+}
+.button {
+    display: inline-block;
+    border-radius: 2px;
+    background-color: #d1a734;
+    border:none;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 12px;
+  }
+  .button:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+#gameText{
+    font-size: 20px;
+    font-family: 'Sansita Swashed', cursive;
+    color: rgba(247, 247, 247, 0.89);}
+
+.welcomeText{
+    font-size: 60px;
+    font-family: 'Sansita Swashed', cursive;
+    color: rgb(255, 255, 255);}
+
+.navText{
+    font-size: 25px;
+    font-family: 'Sansita Swashed', cursive;
+}
+
+#admin{
+    color:rgb(207, 175, 29);
+}
+
+#userNavBar{
+  padding-left: 20%;
+    
+}
+.navbar-nav{
+  padding-left:33%;
+  
+}
+
