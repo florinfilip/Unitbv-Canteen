@@ -1,8 +1,7 @@
 package com.florin.restaurant.service;
 
-import com.florin.restaurant.model.Menu;
+import com.florin.restaurant.menu.Menu;
 
-import java.util.HashMap;
 import java.util.List;
 
 

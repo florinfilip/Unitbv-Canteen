@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
+
+
 body{
     background-image: url("../pics/background.jpg");
 }
 
 #menuBlock{
-background: rgba(132, 134, 133, 0.87);
+background: rgba(225, 173, 41, 0.862);
+font-family: 'Sansita Swashed', cursive;
 }

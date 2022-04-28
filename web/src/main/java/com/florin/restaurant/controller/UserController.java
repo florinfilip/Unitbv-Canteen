@@ -1,7 +1,6 @@
 package com.florin.restaurant.controller;
 
 
-import com.florin.restaurant.model.Menu;
 import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.ViewNames;

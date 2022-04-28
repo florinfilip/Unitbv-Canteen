@@ -1,7 +1,7 @@
 package com.florin.restaurant;
 
 import com.florin.restaurant.model.CheckoutOrder;
-import com.florin.restaurant.model.Menu;
+import com.florin.restaurant.menu.Menu;
 import com.florin.restaurant.order_item.OrderItem;
 import com.florin.restaurant.repository.OrderRepository;
 import com.florin.restaurant.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.florin.restaurant.model;
+package com.florin.restaurant.menu;
 
 
 
@@ -9,7 +9,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "menu", schema = "public")
 @Getter

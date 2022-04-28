@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import static com.florin.restaurant.util.ViewNames.REDIRECT;
+
 @Controller
 public class LoginController {
 
@@ -17,6 +19,6 @@ Authentication authentication = SecurityContextHolder.getContext().getAuthentica
 if(authentication==null || authentication instanceof AnonymousAuthenticationToken){
     return ViewNames.LOGIN;
     }
-return ViewNames.REDIRECT;
+return REDIRECT;
 
 }}

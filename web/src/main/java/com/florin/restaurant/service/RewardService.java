@@ -1,6 +1,5 @@
 package com.florin.restaurant.service;
 
-import com.florin.restaurant.model.Menu;
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.user.User;
 

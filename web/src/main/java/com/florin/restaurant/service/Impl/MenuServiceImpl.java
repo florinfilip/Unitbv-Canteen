@@ -1,7 +1,7 @@
 package com.florin.restaurant.service.Impl;
 
 import com.florin.restaurant.exceptions.NotFoundException;
-import com.florin.restaurant.model.Menu;
+import com.florin.restaurant.menu.Menu;
 import com.florin.restaurant.repository.MenuRepository;
 import com.florin.restaurant.service.MenuService;
 import lombok.RequiredArgsConstructor;

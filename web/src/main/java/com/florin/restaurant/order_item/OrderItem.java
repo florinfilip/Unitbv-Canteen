@@ -2,9 +2,8 @@ package com.florin.restaurant.order_item;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.florin.restaurant.model.Menu;
+import com.florin.restaurant.menu.Menu;
 import com.florin.restaurant.user.User;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
