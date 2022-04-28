@@ -1,5 +1,6 @@
 package com.florin.restaurant.menu;
 
+import lombok.Data;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -11,8 +12,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
+@Data
 public class MenuImporter {
+    boolean upload=false;
+    String alertMessage="Upload Successful";
 
     public List<Menu> excelImport(MultipartFile file) {
          List<Menu> menuList = new ArrayList<>();
@@ -21,12 +26,14 @@ public class MenuImporter {
          String description= "";
          String url= "";
          double price= 0.00;
+
         String filePath="C:\\Users\\ffilip\\OneDrive - ENDAVA\\Desktop\\restaurant\\restaurant\\web\\src\\main\\resources\\static";
         long start = System.currentTimeMillis();
 //FileInputStream
         InputStream inputStream;
-        try {
-            inputStream = file.getInputStream();
+
+        if(canUpload(file)){
+        try {inputStream = file.getInputStream();
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet firstSheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = firstSheet.iterator();
@@ -65,8 +72,12 @@ workbook.close();
             System.out.printf("Import done in %d ms\n", (end-start));
         } catch(Exception e){
             e.printStackTrace();
-        }
-        System.out.println(menuList);
+            upload=false;
+        }}
 return menuList;
+    }
+
+    public boolean canUpload(MultipartFile file){
+        return !file.isEmpty() && Objects.requireNonNull(file.getOriginalFilename()).endsWith(".xlsx");
     }
 }

@@ -30,11 +30,15 @@ public class User {
     @NotEmpty(message = "You must provide a username!")
     @Size(min=5, max=30)
     private String username;
-   @NotEmpty(message = "You must provide a password!")
+
+    @NotEmpty(message = "You must provide a password!")
     @ValidPassword
-//    @Size(min=5, max=30)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String rpassword;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 

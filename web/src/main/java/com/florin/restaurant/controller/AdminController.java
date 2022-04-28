@@ -11,6 +11,7 @@ import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,13 +51,14 @@ private final FileUploadService fileUploadService;
         return "Export Successfully";
     }
     @PostMapping("admin/import")
-    public String importExcel(@RequestParam("file") MultipartFile file) throws IOException{
+    public String importExcel(@RequestParam("file") MultipartFile file, Model model) throws IOException{
         MenuImporter excelImporter = new MenuImporter();
         List<Menu> menuList = excelImporter.excelImport(file);
+        System.out.println(excelImporter.canUpload(file));
         menuList.forEach(menuService::addMenu);
-
         fileUploadService.uploadFile(file);
-        System.out.println(file.getOriginalFilename());
+        model.addAttribute("importer",excelImporter);
+        System.out.println(excelImporter.canUpload(file));
         return REDIRECT+"admin";
     }
 }

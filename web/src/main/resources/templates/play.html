@@ -2,24 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
      style="height: 100%;">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+<link rel="stylesheet" th:href="@{/styles/gameStyle.css}" href="../static/styles/gameStyle.css">
 <head>
     <meta charset="UTF-8">
-    <title>Guess the Number Game</title>
+    <title>Guess the Number</title>
 </head>
-<body
-        style="background:linear-gradient(to bottom right,#355687,#83a7de);">
-    <div align="center">
+<body>
+    <div class="gameBox" align="center">
         <h1>Guess the Number Game</h1>
         <h3 th:text="${mainMessage}">Main Message Content</h3>
         <h3 th:if="${gameService.isGameTime(user)}" th:text="${resultMessage}">Result Message Content</h3>
 
         <form th:if="${gameService.isGameTime(user)}"action="play" method="post">
             <label for="guess">Enter your guess</label>
-            <input id="guess" type="number" name="guess"/>
+            <input autofocus id="guess" type="number" name="guess"/>
             <input type="submit" value="Submit"/>
         </form>
-    </div>
+    
+   </div>
+<footer>
     <a href="/home"><input class="btn btn-primary" type="button" value="Home" > </a>
+
+</footer>
 </body>
 </html>

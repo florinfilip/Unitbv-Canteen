@@ -6,17 +6,12 @@ import com.florin.restaurant.service.RoleService;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.AttributeNames;
-import com.florin.restaurant.util.Mappings;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.florin.restaurant.util.AttributeNames.USER;
@@ -37,8 +32,6 @@ public class EditUserController {
         if(bindingResult.hasErrors()){
             return EDIT_USER;
         }
-
-            System.out.println(bindingResult.getModel().entrySet().stream().findFirst().get().getValue().toString());
         userService.updateUser(user);
         return REDIRECT+ USERS;
     }
