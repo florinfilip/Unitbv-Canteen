@@ -1,5 +1,6 @@
 package com.florin.restaurant.token;
 
+import com.florin.restaurant.exceptions.NotFoundException;
 import com.florin.restaurant.repository.ConfirmationTokenRepository;
 import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.user.MyUserDetails;
@@ -34,7 +35,16 @@ public class ConfirmationTokenService {
     }
 
     public String confirmToken(String token) {
-       confirmationTokenRepository.findByToken(token).get().getUser().setEnabled(true);
+      ConfirmationToken confirmationToken = confirmationTokenRepository.findByToken(token)
+              .orElseThrow(() -> new NotFoundException("Token Not Found"));
+      if(confirmationToken.getConfirmedAt() != null){
+          throw new IllegalStateException("Email already confirmed!");
+      }
+      if(confirmationToken.getExpiresAt().isBefore(LocalDateTime.now())){
+          throw new IllegalStateException("token expired");
+      }
+      confirmationToken.setConfirmedAt(LocalDateTime.now());
+      confirmationToken.getUser().setEnabled(true);
        return token;
     }
 }

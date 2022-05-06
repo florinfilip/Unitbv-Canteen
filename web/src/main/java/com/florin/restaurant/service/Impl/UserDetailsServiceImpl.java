@@ -1,5 +1,6 @@
 package com.florin.restaurant.service.Impl;
 
+import com.florin.restaurant.email.EmailSender;
 import com.florin.restaurant.repository.UserRepository;
 import com.florin.restaurant.role.Role;
 import com.florin.restaurant.service.IUserDetailsService;
@@ -29,6 +30,7 @@ private final UserRepository userRepository;
 private final BCryptPasswordEncoder passwordEncoder;
 private final EntityManager entityManager;
 private final ConfirmationTokenService confirmationTokenService;
+private final EmailSender emailSender;
 private final String link = "http://localhost:8080/register/confirm?token=";
 
     @Override
@@ -58,10 +60,14 @@ private final String link = "http://localhost:8080/register/confirm?token=";
         newUser.setEnabled(true);
         newUser.setRoles(List.of(entityManager.find(Role.class,1)));
         userRepository.save(newUser);
-        final ConfirmationToken token = confirmationTokenService.from(LocalDateTime.now(),
+        final ConfirmationToken token = confirmationTokenService.from(
+                LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(15),
                 newUser);
-        confirmationTokenService.saveConfirmationToken(token);}
+        confirmationTokenService.saveConfirmationToken(token);
+        emailSender.sendEmail(user.getEmail(),buildEmail(user.getUsername(),link+token.getToken()));
+
+    }
     @Override
     public void updateUser(User user){
         User newUser=userRepository.findById(user.getId()).get();
@@ -75,7 +81,6 @@ private final String link = "http://localhost:8080/register/confirm?token=";
         System.out.println(newUser.getPassword());
         newUser.setEnabled(user.isEnabled());
         newUser.setRoles(user.getRoles());
-
         userRepository.save(newUser);
     }
 
