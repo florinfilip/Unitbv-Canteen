@@ -1,22 +1,18 @@
 package com.florin.restaurant.user;
 
-import com.florin.restaurant.role.Role;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 public class MyUserDetails implements UserDetails {
+
     private final User user;
 
     public MyUserDetails(User user) {

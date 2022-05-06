@@ -1,6 +1,8 @@
 package com.florin.restaurant.config;
 
+import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.service.Impl.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,18 +15,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final IUserDetailsService userDetailsService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new UserDetailsServiceImpl();
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        return userDetailsService;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,8 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public DaoAuthenticationProvider authenticationProvider(){
 
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    authenticationProvider.setPasswordEncoder(passwordEncoder());
-    authenticationProvider.setUserDetailsService(userDetailsService());
+    authenticationProvider.setPasswordEncoder(passwordEncoder);
+    authenticationProvider.setUserDetailsService(userDetailsService);
 
     return authenticationProvider;
 

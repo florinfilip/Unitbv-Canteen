@@ -29,6 +29,16 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             class="text-danger"></span>
           </div>
 
+          <div class="form-row py-1">
+            <input  
+            class="form-control"
+            id="email"
+            type="text"
+            name="email"
+            th:field="*{email}"
+            placeholder="Enter Your Email Address"/>
+          </div>
+
            <div class="form-row py-1">
              <input  
              class="form-control"

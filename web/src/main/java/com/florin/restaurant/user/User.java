@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.florin.restaurant.annotations.ValidPassword;
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.role.Role;
+import com.florin.restaurant.token.ConfirmationToken;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,7 +40,10 @@ public class User {
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String rpassword;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    @NotEmpty(message = "You must provide an email!")
+    private String email;
+
     private boolean enabled;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
@@ -65,8 +69,9 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    @OneToMany(orphanRemoval = true,mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reward> rewards;
+
 
     @Override
     public String toString() {

@@ -26,15 +26,25 @@
         </div>
 
         <div class="form-group row">
+            <label class="col-form-label col-4">Email</label>
+            <div class="col-8">
+                <input 
+                type="text"
+                name="email"
+                th:field="*{email}"
+                placeholder="Enter New Email" 
+                class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="col-form-label col-4">Password</label>
             <div class="col-8">
                 <input 
                 type="text"
                 name="password"
                 placeholder="Enter Here A New Password If Desired" 
-                class="form-control" 
-                
-                       />
+                class="form-control"/>
             </div>
         </div>
 

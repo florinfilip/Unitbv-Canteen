@@ -28,5 +28,7 @@ public interface IUserDetailsService extends UserDetailsService {
 
     boolean userExists(String username);
 
+    boolean emailExists(String email);
+
     MyUserDetails findUserById(int id);
 }
