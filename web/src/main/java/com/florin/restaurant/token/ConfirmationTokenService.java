@@ -2,6 +2,7 @@ package com.florin.restaurant.token;
 
 import com.florin.restaurant.exceptions.NotFoundException;
 import com.florin.restaurant.repository.ConfirmationTokenRepository;
+import com.florin.restaurant.repository.UserRepository;
 import com.florin.restaurant.service.IUserDetailsService;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
@@ -20,6 +21,7 @@ public class ConfirmationTokenService {
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
     public void saveConfirmationToken(ConfirmationToken token){
         confirmationTokenRepository.save(token);
@@ -37,6 +39,7 @@ public class ConfirmationTokenService {
     public String confirmToken(String token) {
       ConfirmationToken confirmationToken = confirmationTokenRepository.findByToken(token)
               .orElseThrow(() -> new NotFoundException("Token Not Found"));
+
       if(confirmationToken.getConfirmedAt() != null){
           throw new IllegalStateException("Email already confirmed!");
       }
@@ -45,6 +48,8 @@ public class ConfirmationTokenService {
       }
       confirmationToken.setConfirmedAt(LocalDateTime.now());
       confirmationToken.getUser().setEnabled(true);
+      confirmationTokenRepository.updateConfirmedAt(token,LocalDateTime.now());
+      userRepository.enableAppUser(confirmationToken.getUser().getEmail());
        return token;
     }
 }

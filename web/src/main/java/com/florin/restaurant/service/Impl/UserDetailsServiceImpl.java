@@ -57,7 +57,7 @@ private final String link = "http://localhost:8080/register/confirm?token=";
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setEnabled(true);
+        newUser.setEnabled(false);
         newUser.setRoles(List.of(entityManager.find(Role.class,1)));
         userRepository.save(newUser);
         final ConfirmationToken token = confirmationTokenService.from(
