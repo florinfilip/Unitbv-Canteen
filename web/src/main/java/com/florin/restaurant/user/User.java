@@ -1,6 +1,7 @@
 package com.florin.restaurant.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.florin.restaurant.annotations.ValidEmail;
 import com.florin.restaurant.annotations.ValidPassword;
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.role.Role;
@@ -42,6 +43,7 @@ public class User {
     private String rpassword;
 
     @NotEmpty(message = "You must provide an email!")
+    @ValidEmail
     private String email;
 
     private boolean enabled;

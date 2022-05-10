@@ -64,6 +64,11 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <p class="error-message" th:text="${message}"></p>
                 </li>
             </ul>
+      <ul class="text-danger" th:each="error: ${#fields.errors('email')}">
+          <li th:each="message : ${error.split(',')}">
+              <p class="error-message" th:text="${message}"></p>
+          </li>
+      </ul>
             <span class="text-danger" th:if="${errorMessage}"
             th:text="${errorMessage}">
             Error </span>
