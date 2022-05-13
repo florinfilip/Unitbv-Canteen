@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
 
 html, body{position:relative;
-    background-color:rgba(248, 247, 216, 0.877);
+    background-image: url("../pics/background.jpg");
     font-family:sans-serif;
     height: 100%;
 }

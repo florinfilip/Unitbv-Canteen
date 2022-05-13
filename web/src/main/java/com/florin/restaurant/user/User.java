@@ -5,7 +5,6 @@ import com.florin.restaurant.annotations.ValidEmail;
 import com.florin.restaurant.annotations.ValidPassword;
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.role.Role;
-import com.florin.restaurant.token.ConfirmationToken;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,8 +29,14 @@ public class User {
     private int id;
 
     @NotEmpty(message = "You must provide a username!")
+    @Column(name = "first_name")
     @Size(min=5, max=30)
-    private String username;
+    private String firstName;
+
+    @NotEmpty(message = "You must provide a username!")
+    @Column(name = "last_name")
+    @Size(min=5, max=30)
+    private String lastName;
 
     @NotEmpty(message = "You must provide a password!")
     @ValidPassword
@@ -79,8 +84,11 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
+                ", rpassword='" + rpassword + '\'' +
+                ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 ", lastPlayed=" + lastPlayed +

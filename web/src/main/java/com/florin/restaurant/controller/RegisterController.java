@@ -1,10 +1,9 @@
 package com.florin.restaurant.controller;
 
 import com.florin.restaurant.exceptions.SignUpException;
-import com.florin.restaurant.service.IUserDetailsService;
+import com.florin.restaurant.service.MyUserDetailsService;
 import com.florin.restaurant.token.ConfirmationTokenService;
 import com.florin.restaurant.user.User;
-import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ import static com.florin.restaurant.util.ViewNames.REDIRECT;
 @Controller
 @RequiredArgsConstructor
 public class RegisterController {
-    private final IUserDetailsService userService;
+    private final MyUserDetailsService userService;
     private final ConfirmationTokenService confirmationTokenService;
 
     @GetMapping(REGISTER)
@@ -48,9 +47,7 @@ public class RegisterController {
         if(!Objects.equals(user.getPassword(),user.getRpassword())){
             throw new SignUpException("Passwords don't match!");
         }
-        if(userService.userExists(user.getUsername())){
-            throw new SignUpException("Username is taken by another user! Please pick another one.");
-        }
+
         if(userService.emailExists(user.getEmail())){
             throw new SignUpException("This Email has been already registered!");
         }

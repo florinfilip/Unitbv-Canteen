@@ -2,7 +2,6 @@ package com.florin.restaurant.service;
 
 import com.florin.restaurant.order_item.OrderItem;
 import com.florin.restaurant.user.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -14,5 +13,5 @@ public interface OrderService {
 
     void deleteOrder(int orderId);
     OrderItem getOrderItemById(int id);
-    public void removeOrderItem(int id, User user);
+    void removeOrderItem(int id, User user);
 }

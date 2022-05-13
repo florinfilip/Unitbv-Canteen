@@ -1,13 +1,13 @@
 package com.florin.restaurant.controller;
 
 import com.florin.restaurant.util.Mappings;
-import com.florin.restaurant.util.ViewNames;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import static com.florin.restaurant.util.ViewNames.LOGIN;
 import static com.florin.restaurant.util.ViewNames.REDIRECT;
 
 @Controller
@@ -17,7 +17,9 @@ public class LoginController {
             public String loginInit(){
 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 if(authentication==null || authentication instanceof AnonymousAuthenticationToken){
-    return ViewNames.LOGIN;
+    assert authentication != null;
+    System.out.println(authentication.getName());
+    return LOGIN;
     }
 return REDIRECT;
 

@@ -1,7 +1,7 @@
 package com.florin.restaurant.controller;
 
 
-import com.florin.restaurant.service.IUserDetailsService;
+import com.florin.restaurant.service.MyUserDetailsService;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.ViewNames;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-private final IUserDetailsService userService;
+private final MyUserDetailsService userService;
 
     @GetMapping()
     public ModelAndView list(Model model){

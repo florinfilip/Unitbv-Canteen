@@ -24,7 +24,7 @@ href="../static/styles/loginStyle.css">
     <div class="loginBox col col-sm-2 text-center border">
       <form th:action="@{/login}" method="post">
       <div class="form-row py-1">
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
+        <input type="text" name="email" class="form-control" placeholder="Email" required autofocus/>
 
       </div>
       <div class="form-row py-1">
@@ -32,7 +32,7 @@ href="../static/styles/loginStyle.css">
       </div>
 
       <div th:if="${param.error}">
-        <p class="text-danger"> Invalid username or password !</p>
+        <p class="text-danger"> Invalid email or password !</p>
       </div>
       
       <div class="form-row py-1">

@@ -32,6 +32,10 @@ public class MyUserDetails implements UserDetails {
         return this.user;
     }
 
+    public String getEmail(){return this.user.getEmail();}
+
+    public String getFirstName(){return this.user.getFirstName();}
+
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -39,7 +43,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
 
     @Override
@@ -61,4 +65,6 @@ public class MyUserDetails implements UserDetails {
     public boolean isEnabled() {
         return user.isEnabled();
     }
+
+
 }

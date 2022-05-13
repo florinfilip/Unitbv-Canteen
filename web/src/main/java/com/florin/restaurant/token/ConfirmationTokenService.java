@@ -3,12 +3,8 @@ package com.florin.restaurant.token;
 import com.florin.restaurant.exceptions.NotFoundException;
 import com.florin.restaurant.repository.ConfirmationTokenRepository;
 import com.florin.restaurant.repository.UserRepository;
-import com.florin.restaurant.service.IUserDetailsService;
-import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.florin.restaurant.controller;
 
 import com.florin.restaurant.role.Role;
-import com.florin.restaurant.service.IUserDetailsService;
+import com.florin.restaurant.service.MyUserDetailsService;
 import com.florin.restaurant.service.RoleService;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
@@ -23,7 +23,7 @@ import static com.florin.restaurant.util.ViewNames.*;
 @RequiredArgsConstructor
 public class EditUserController {
 
-    private final IUserDetailsService userService;
+    private final MyUserDetailsService userService;
     private final RoleService roleService;
 
         @PostMapping(USERS_SAVE)

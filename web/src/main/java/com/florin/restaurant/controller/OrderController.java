@@ -2,17 +2,14 @@ package com.florin.restaurant.controller;
 
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.order_item.OrderItem;
-import com.florin.restaurant.service.IUserDetailsService;
-import com.florin.restaurant.service.MenuService;
+import com.florin.restaurant.service.MyUserDetailsService;
 import com.florin.restaurant.service.OrderService;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
-import com.florin.restaurant.util.AttributeNames;
 import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,7 +29,7 @@ public class OrderController {
 
 
     private final OrderService orderService;
-    private final IUserDetailsService userDetailsService;
+    private final MyUserDetailsService userDetailsService;
 
     @GetMapping(ORDER)
     public String showList(Model model,
