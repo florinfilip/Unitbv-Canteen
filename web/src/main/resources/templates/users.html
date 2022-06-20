@@ -14,7 +14,8 @@
     <table  class="table" th:if="${ not#lists.isEmpty(users)}">
         <thead class="thead-dark">
              <tr><th scope="col">Id</th>
-                 <th scope="col">Name</th>
+                 <th scope="col">First Name</th>
+                 <th scope="col">Last Name</th>
                  <th scope="col">Password</th>
                  <th scope="col">Enabled</th>
                  <th scope="col">Roles</th>
@@ -25,13 +26,12 @@
         <th:block th:each="user : ${users}">
 
             <tr>
-
                 <td><a  th:text="${user.id}"> ID</a></td>
-                <td><a  th:text="${user.username}"> NAME</a></td>
-                    <td th:text="${user.password}">PASSWORD </td>
+                <td><a  th:text="${user.firstName}"> FirstName</a></td>
+                <td><a  th:text="${user.lastName}"> LastName</a></td>
+                <td th:text="${user.password}">PASSWORD </td>
                 <td th:text="${user.enabled}">ENABLED </td>
                 <td th:text="${user.getRoleNames()}">ROLES </td>
-<!--                <td th:each="role : ${roles}" th:text="${user.roles[0]}">ROLES </td>-->
 
                 <td>
 

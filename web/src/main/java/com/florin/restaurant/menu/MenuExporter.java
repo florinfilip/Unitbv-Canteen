@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuExporter {
-    private XSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Menu> menuList;
+    private final List<Menu> menuList;
 
     public MenuExporter(List<Menu> menuList){
         this.menuList=menuList;

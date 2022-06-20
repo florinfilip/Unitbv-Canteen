@@ -1,6 +1,7 @@
 package com.florin.restaurant.config;
 
-import com.florin.restaurant.service.Impl.UserDetailsServiceImpl;
+import com.florin.restaurant.service.MyUserDetailsService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -8,23 +9,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new UserDetailsServiceImpl();
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+    private final MyUserDetailsService userDetailsService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                   .formLogin()
                 .loginPage("/login")
+                .usernameParameter("email")
                        .defaultSuccessUrl("/home",true)
                        .permitAll()
                 .and()
@@ -63,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public DaoAuthenticationProvider authenticationProvider(){
 
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    authenticationProvider.setPasswordEncoder(passwordEncoder());
-    authenticationProvider.setUserDetailsService(userDetailsService());
+    authenticationProvider.setPasswordEncoder(passwordEncoder);
+    authenticationProvider.setUserDetailsService(userDetailsService);
 
     return authenticationProvider;
 

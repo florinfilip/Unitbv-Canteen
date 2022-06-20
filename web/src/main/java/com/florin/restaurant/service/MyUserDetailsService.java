@@ -10,11 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface IUserDetailsService extends UserDetailsService {
-    @Override
-    default UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
-    }
+public interface MyUserDetailsService extends UserDetailsService {
 
     List<User> getUsers();
 
@@ -26,7 +22,7 @@ public interface IUserDetailsService extends UserDetailsService {
 
     MyUserDetails getCurrentlyLoggedUser(Authentication authentication);
 
-    boolean userExists(String username);
+    boolean emailExists(String email);
 
     MyUserDetails findUserById(int id);
 }

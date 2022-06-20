@@ -1,6 +1,7 @@
 package com.florin.restaurant.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.florin.restaurant.annotations.ValidEmail;
 import com.florin.restaurant.annotations.ValidPassword;
 import com.florin.restaurant.model.Reward;
 import com.florin.restaurant.role.Role;
@@ -27,9 +28,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "You must provide a username!")
+    @NotEmpty(message = "You must provide a name!")
+    @Column(name = "first_name")
     @Size(min=5, max=30)
-    private String username;
+    private String firstName;
+
+    @NotEmpty(message = "You must provide a name!")
+    @Column(name = "last_name")
+    @Size(min=5, max=30)
+    private String lastName;
 
     @NotEmpty(message = "You must provide a password!")
     @ValidPassword
@@ -39,7 +46,11 @@ public class User {
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String rpassword;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    @NotEmpty(message = "You must provide an email!")
+    @ValidEmail
+    private String email;
+
     private boolean enabled;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
@@ -65,15 +76,19 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    @OneToMany(orphanRemoval = true,mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reward> rewards;
+
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
+                ", rpassword='" + rpassword + '\'' +
+                ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 ", lastPlayed=" + lastPlayed +

@@ -9,6 +9,7 @@ import com.florin.restaurant.service.Impl.FileUploadService;
 import com.florin.restaurant.service.MenuService;
 import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +24,13 @@ import static com.florin.restaurant.util.ViewNames.ADMIN;
 import static com.florin.restaurant.util.ViewNames.REDIRECT;
 
 @Controller
+@AllArgsConstructor
 public class AdminController {
 
 private final MenuService menuService;
 private final FileUploadService fileUploadService;
 
-    public AdminController(MenuService menuService, FileUploadService fileUploadService) {
-        this.menuService = menuService;
-        this.fileUploadService = fileUploadService;
-    }
+
 
     @GetMapping(ADMIN)
     public String admin(){

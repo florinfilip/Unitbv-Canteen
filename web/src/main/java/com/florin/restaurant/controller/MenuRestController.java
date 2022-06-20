@@ -24,10 +24,8 @@ public class MenuRestController {
 
 @PostMapping(Mappings.ADD)
     public ResponseEntity<Menu> addMenu(@RequestBody Menu menu){
-
     Menu savedMenu = menuService.addMenu(menu);
     return new ResponseEntity<>(savedMenu, HttpStatus.CREATED);
-
 }
 
 @GetMapping("/menu/{menuId}")

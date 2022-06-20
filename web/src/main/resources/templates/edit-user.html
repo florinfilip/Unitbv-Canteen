@@ -18,10 +18,29 @@
     <input class="form-control" hidden type="text" th:value="${user.id}" th:field="*{id}"/>
     <div class="m-3">
         <div class="form-group row">
-            <label class="col-form-label col-4">Username</label>
+            <label class="col-form-label col-4">First Name</label>
             <div class="col-8">
-                <input type="text" class="form-control" th:field="*{username}"
+                <input type="text" class="form-control" th:field="*{firstName}"
                        required minlength="5" maxlength="30"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Last Name</label>
+            <div class="col-8">
+                <input type="text" class="form-control" th:field="*{lastName}"
+                       required minlength="5" maxlength="30"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-4">Email</label>
+            <div class="col-8">
+                <input 
+                type="text"
+                name="email"
+                th:field="*{email}"
+                placeholder="Enter New Email" 
+                class="form-control"/>
             </div>
         </div>
 
@@ -32,9 +51,7 @@
                 type="text"
                 name="password"
                 placeholder="Enter Here A New Password If Desired" 
-                class="form-control" 
-                
-                       />
+                class="form-control"/>
             </div>
         </div>
 

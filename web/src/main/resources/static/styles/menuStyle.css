@@ -9,3 +9,99 @@ body{
 background: rgba(225, 173, 41, 0.862);
 font-family: 'Sansita Swashed', cursive;
 }
+
+.container-checkout{
+    background: rgba(255, 255, 255, 0.95);
+    font-family: 'Sansita Swashed', cursive;
+}
+.card-container{
+padding-left:80px;
+position: sticky;
+}
+.title{
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.card{
+    /*width: 100%;*/
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.card-title{
+    margin-bottom: 30px;
+}
+
+.description {
+    font-size: 14px;
+    line-height: 1.5em;
+    padding-right:20px;
+    /*margin-bottom: 30px;*/
+}
+
+.price-down{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.menu-img{
+
+}
+
+.round{
+    border-radius: 20%;
+    float: left;
+    width:  150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.add-button{
+    margin-top:50px;
+    margin-left: 60px;
+    padding: 10px;
+    color:coral;
+}
+
+.floating-right-bottom-btn
+{   position : absolute;
+    right : 10px;
+    bottom : 16px;
+    cursor: pointer;
+    transition: 0.12s;
+    background-color: coral;
+    border-color: coral;
+}
+
+.floating-left-bottom-btn {
+    transition: all 0.5s;
+    position: absolute;
+    left: 10px;
+    bottom: 16px;
+    cursor: pointer;
+    background-color: coral;
+    border-color: coral;
+}
+.floating-left-bottom-btn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.5s;
+    color: rgba(35, 26, 7, 0.98);
+    background-color: coral;
+    border-color: coral;
+    border-radius: 20px;
+}
+
+.floating-right-bottom-btn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.5s;
+    color: rgba(35, 26, 7, 0.98);
+    background-color: coral;
+    border-color: coral;
+    border-radius: 20px;
+}
+

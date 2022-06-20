@@ -10,17 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping(Mappings.MENUS_ID)
 public class MenuInspectController {
-
-
     private final MenuService menuService;
-
-
     @ModelAttribute
     protected Menu modelMenu(@PathVariable int id){
 

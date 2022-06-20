@@ -10,9 +10,9 @@ public class PasswordGenerator {
 
 
     @Test
-    void shouldgeneratePassword(){
+    void shouldGeneratePassword(){
         BCryptPasswordEncoder encoder  = new BCryptPasswordEncoder();
-        String rawPass="endava";
+        String rawPass="Endava1!";
         String encodedPass= encoder.encode(rawPass);
         System.out.println(encodedPass);
     }

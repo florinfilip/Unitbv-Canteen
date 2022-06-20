@@ -7,12 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserFactory {
 
-    @Autowired
-    private static UserRepository userRepository;
-
     public static User createUser(){
        return User.builder()
-                .username("Florin")
+                .firstName("Florin")
                 .password("juhgn")
                 .enabled(true)
                 .build();

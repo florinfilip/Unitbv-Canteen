@@ -1,13 +1,8 @@
 package com.florin.restaurant.userService;
 
 import com.florin.restaurant.repository.UserRepository;
-import com.florin.restaurant.service.Impl.UserDetailsServiceImpl;
 import com.florin.restaurant.user.User;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

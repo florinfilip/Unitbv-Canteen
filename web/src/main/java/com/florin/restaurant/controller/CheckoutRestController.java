@@ -2,7 +2,7 @@ package com.florin.restaurant.controller;
 
 import com.florin.restaurant.model.CheckoutOrder;
 import com.florin.restaurant.order_item.OrderItem;
-import com.florin.restaurant.service.IUserDetailsService;
+import com.florin.restaurant.service.MyUserDetailsService;
 import com.florin.restaurant.service.OrderService;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.AttributeNames;
@@ -22,14 +22,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CheckoutRestController {
 
-    private final IUserDetailsService userDetailsService;
+    private final MyUserDetailsService userDetailsService;
     private final OrderService orderService;
 
-    String INVALID_DISCOUNT_CODE = "Invalid Discount Code!";
-
     @PostMapping(Mappings.CHECKOUT)
-    public ResponseEntity readCheckoutOrders(@ModelAttribute(AttributeNames.CHECKOUT_ORDER) CheckoutOrder checkoutOrder,
-                                             @AuthenticationPrincipal Authentication authentication){
+    public ResponseEntity<CheckoutOrder> readCheckoutOrders(@ModelAttribute(AttributeNames.CHECKOUT_ORDER) CheckoutOrder checkoutOrder,
+                                                            @AuthenticationPrincipal Authentication authentication){
 
         User user=userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
         List<OrderItem> orderItemList = orderService.findOrderByUser(user);
@@ -38,7 +36,7 @@ public class CheckoutRestController {
         applyDiscountCode(checkoutOrder, user);
         orderItemList.forEach(order->orderService.deleteOrder(order.getId()));
 
-        return new ResponseEntity(checkoutOrder, HttpStatus.OK);
+        return new ResponseEntity<>(checkoutOrder, HttpStatus.OK);
     }
 
     private void applyDiscountCode(CheckoutOrder checkoutOrder, User user) {
