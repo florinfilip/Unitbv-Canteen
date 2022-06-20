@@ -38,6 +38,7 @@ html, body{position:relative;
     cursor: pointer;
     margin: 5px;
     border-radius: 12px;
+    transition: 0.12s;
   }
   .button:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -93,7 +94,6 @@ html, body{position:relative;
     
 }
 .navbar-nav{
-  padding-left:33%;
-  
+  padding-left:30%;
 }
 

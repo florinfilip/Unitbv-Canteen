@@ -1,12 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
 
-.menu{
-    background: rgba(0, 0, 0, 0.1);
+html, body{position:relative;
+    background-image: url("../pics/background.jpg");
+    font-family: 'Sansita Swashed', cursive;
+    color: #070000;
+    height: 100%;
+}
+.checkout-container{
+    background-color: rgb(255, 255, 255);
+    margin-left: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #070000;
+    border-radius: 20px;
+    height: 300px;
+    width: 450px;
 }
 
+.menu-container{
+    background: rgba(255, 255, 255, 0.93);
+    margin-top:10%;
+    border-style: double;
+    border-color: #070000;
+    border-width: thin;
+}
+
+.menu{
+    background: rgb(255, 255, 255);
+    border-radius: 10%;
+
+}
+.menu-img{
+    padding:10px;
+}
 .round{
     border-radius: 20%;
     float: left;
     width:  150px;
     height: 150px;
     object-fit: cover;
+}
+.checkout-button{
+    padding-top:50%;
+}
+.button {
+    background-color: coral;
+    border-color: coral;
 }

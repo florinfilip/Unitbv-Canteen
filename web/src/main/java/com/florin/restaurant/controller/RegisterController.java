@@ -38,7 +38,6 @@ public class RegisterController {
         return confirmationTokenService.confirmToken(token);
     }
 
-
     @PostMapping(REGISTER)
     public String saveUser(@Valid @ModelAttribute(USER)  User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -47,18 +46,10 @@ public class RegisterController {
         if(!Objects.equals(user.getPassword(),user.getRpassword())){
             throw new SignUpException("Passwords don't match!");
         }
-
         if(userService.emailExists(user.getEmail())){
             throw new SignUpException("This Email has been already registered!");
         }
         userService.saveUser(user);
-
         return REDIRECT + HOME;
     }
-
-
-
-
-
-
 }

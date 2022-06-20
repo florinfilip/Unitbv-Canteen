@@ -21,6 +21,7 @@ import java.util.List;
 import static com.florin.restaurant.util.AttributeNames.ORDER_ITEM_LIST;
 import static com.florin.restaurant.util.AttributeNames.REWARD_LIST;
 import static com.florin.restaurant.util.Mappings.ORDER;
+import static com.florin.restaurant.util.ViewNames.REDIRECT;
 
 @Controller
 @Slf4j
@@ -49,8 +50,9 @@ public class OrderController {
                            @AuthenticationPrincipal Authentication authentication) {
         User user = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
         int addedQuantity = orderService.addMenuToOrder(id, quantity, user);
-        return ViewNames.REDIRECT + ViewNames.ORDER;
+        return REDIRECT +"menus/"+ ViewNames.LIST;
     }
+
 
 
     @DeleteMapping(path = ORDER + "/delete/{menuId}")
@@ -60,7 +62,7 @@ public class OrderController {
         User user = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
         orderService.removeOrderItem(id, user);
 
-        return ViewNames.REDIRECT + ViewNames.ORDER;
+        return REDIRECT + ViewNames.ORDER;
     }
 }
 

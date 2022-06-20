@@ -34,7 +34,6 @@ public int addMenuToOrder(@NotNull int id, int qty, User user){
         int qtyAdded = qty;
         Menu menu = menuRepository.findById(id).get();
         OrderItem orderItem = orderRepository.findByUserAndMenu(user,menu);
-
         Optional<OrderItem> orderOpt=Optional.ofNullable(orderItem);
 
         if(orderItem!=null){

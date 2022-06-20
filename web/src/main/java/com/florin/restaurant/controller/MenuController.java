@@ -24,14 +24,10 @@ private final MenuService menuService;
 
     @GetMapping(Mappings.LIST)
     public ModelAndView list(Model model){
-        List<Menu> meniuri= menuService.getMenus();
-        model.addAttribute(AttributeNames.MENUS, meniuri);
+        List<Menu> menus= menuService.getMenus();
+        model.addAttribute(AttributeNames.MENUS, menus);
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName(ViewNames.LIST);
         return modelAndView;
     }
-
-
-
-
 }

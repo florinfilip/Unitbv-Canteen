@@ -28,12 +28,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "You must provide a username!")
+    @NotEmpty(message = "You must provide a name!")
     @Column(name = "first_name")
     @Size(min=5, max=30)
     private String firstName;
 
-    @NotEmpty(message = "You must provide a username!")
+    @NotEmpty(message = "You must provide a name!")
     @Column(name = "last_name")
     @Size(min=5, max=30)
     private String lastName;
