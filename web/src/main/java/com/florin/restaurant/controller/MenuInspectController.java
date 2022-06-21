@@ -18,9 +18,9 @@ import java.util.Optional;
 @RequestMapping(Mappings.MENUS_ID)
 public class MenuInspectController {
     private final MenuService menuService;
+
     @ModelAttribute
     protected Menu modelMenu(@PathVariable int id){
-
         return Optional.ofNullable(menuService.getMenuById(id)).get();
     }
 

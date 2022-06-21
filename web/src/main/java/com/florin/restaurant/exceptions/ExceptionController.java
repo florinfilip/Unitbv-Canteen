@@ -8,6 +8,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @ControllerAdvice
 @Slf4j
@@ -19,6 +20,16 @@ public class ExceptionController {
         log.info(e.getMessage());
         FlashMap outputFlashMap= RequestContextUtils.getOutputFlashMap(httpServletRequest);
         if(outputFlashMap!=null){
+            outputFlashMap.put("errorMessage",e.getMessage());
+        }
+        return redirectView;
+    }
+    @ExceptionHandler(ChangePasswordException.class)
+    public RedirectView handle(ChangePasswordException e, HttpServletRequest httpServletRequest){
+        RedirectView redirectView = new RedirectView("/settings");
+        log.info(e.getMessage());
+        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(httpServletRequest);
+        if(!Objects.isNull(outputFlashMap)){
             outputFlashMap.put("errorMessage",e.getMessage());
         }
         return redirectView;

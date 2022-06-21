@@ -18,6 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MyUserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final String USER="USER";
+    private final String ADMIN="ADMIN";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -32,14 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .anonymous().principal("Guest").authorities("GUEST").and()
                 .authorizeRequests()
-                .mvcMatchers("/play").hasAuthority("USER")
-                .mvcMatchers("/order").hasAuthority("USER")
-                .mvcMatchers("/checkout").hasAuthority("USER")
-                .mvcMatchers("/menu").hasAuthority("ADMIN")
-                .mvcMatchers("/add").hasAuthority("ADMIN")
-                .mvcMatchers("/delete").hasAuthority("ADMIN")
-                .mvcMatchers("/admin").hasAuthority("ADMIN")
-                .mvcMatchers("/users").hasAuthority("ADMIN")
+                .mvcMatchers("/play").hasAuthority(USER)
+                .mvcMatchers("/order").hasAuthority(USER)
+                .mvcMatchers("/checkout").hasAuthority(USER)
+                .mvcMatchers("/settings").hasAuthority(USER)
+                .mvcMatchers("/menu").hasAuthority(ADMIN)
+                .mvcMatchers("/add").hasAuthority(ADMIN)
+                .mvcMatchers("/delete").hasAuthority(ADMIN)
+                .mvcMatchers("/admin").hasAuthority(ADMIN)
+                .mvcMatchers("/users").hasAuthority(ADMIN)
                 .mvcMatchers("/register").permitAll()
                 .anyRequest().permitAll()
                 .and()

@@ -17,7 +17,7 @@ public final class ViewNames {
     public static final String REDIRECT_HOME="redirect:/home";
     public static final String REDIRECT="redirect:/";
     public static final String EDIT_USER = "edit-user";
-
+    public static final String SETTINGS ="settings";
 
 
     private ViewNames() {}

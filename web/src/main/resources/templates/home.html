@@ -101,6 +101,10 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         <a sec:authorize="hasAuthority('ADMIN')"th:href="${'/admin'}">
                         <button class="dropdown-item" type="submit">Admin</button></a>
                     </li>
+                    <li>
+                        <a sec:authorize="hasAuthority('USER')"th:href="${'/settings'}">
+                            <button class="dropdown-item" type="submit">Settings</button></a>
+                    </li>
                    
         
 </div>

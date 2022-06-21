@@ -7,6 +7,7 @@ import com.florin.restaurant.service.RewardService;
 import com.florin.restaurant.user.User;
 import com.florin.restaurant.util.Mappings;
 import com.florin.restaurant.util.ViewNames;
+import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -37,13 +38,13 @@ public class GameController {
         model.addAttribute(RESULT_MESSAGE, gameService.getResultMessage());
         model.addAttribute(GAME_SERVICE, gameService);
         model.addAttribute(USER, loggedUser);
+
         if(gameService.isGameWon()){
-    Reward reward = gameService.getGame().getReward();
-    rewardService.saveReward(reward,loggedUser);
+            Reward reward = gameService.getGame().getReward();
+            rewardService.saveReward(reward,loggedUser);
             loggedUser.setLastPlayed(LocalDate.now());
             userDetailsService.updateUser(loggedUser);
             return ViewNames.GAME_OVER;
-
 }
         if(gameService.isGameLost())
         { loggedUser.setLastPlayed(LocalDate.now());
@@ -53,8 +54,11 @@ public class GameController {
     }
 
     @PostMapping(Mappings.PLAY)
-    public String processMessage(@RequestParam int guess){
-        gameService.checkGuess(guess);
+    public String processMessage(@RequestParam String guess){
+        if(Strings.isNullOrEmpty(guess)){
+            guess="0";
+        }
+        gameService.checkGuess(Integer.valueOf(guess));
         return Mappings.REDIRECT_PLAY;
     }
 }

@@ -1,5 +1,6 @@
 package com.florin.restaurant.service;
 
+import com.florin.restaurant.exceptions.ChangePasswordException;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
 import org.springframework.security.core.Authentication;
@@ -25,4 +26,6 @@ public interface MyUserDetailsService extends UserDetailsService {
     boolean emailExists(String email);
 
     MyUserDetails findUserById(int id);
+
+    void changePassword(User user, User modelUser, String newPassword) throws ChangePasswordException;
 }
