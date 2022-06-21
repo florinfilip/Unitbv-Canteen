@@ -1,6 +1,9 @@
 package com.florin.restaurant.service.Impl;
 
 import com.florin.restaurant.email.EmailSender;
+import com.florin.restaurant.exceptions.ChangePasswordException;
+import com.florin.restaurant.exceptions.NotFoundException;
+import com.florin.restaurant.exceptions.SignUpException;
 import com.florin.restaurant.repository.UserRepository;
 import com.florin.restaurant.role.Role;
 import com.florin.restaurant.service.MyUserDetailsService;
@@ -8,9 +11,12 @@ import com.florin.restaurant.token.ConfirmationToken;
 import com.florin.restaurant.token.ConfirmationTokenService;
 import com.florin.restaurant.user.MyUserDetails;
 import com.florin.restaurant.user.User;
+import com.florin.restaurant.validators.PasswordConstraintValidator;
+import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -67,7 +73,6 @@ private final EmailSender emailSender;
         confirmationTokenService.saveConfirmationToken(token);
         String link = "http://localhost:8080/register/confirm?token=";
         emailSender.sendEmail(user.getEmail(),buildEmail(user.getFirstName(), link +token.getToken()));
-
     }
     @Override
     public void updateUser(User user){
@@ -77,16 +82,18 @@ private final EmailSender emailSender;
         newUser.setLastName(user.getLastName());
         newUser.setEmail(user.getEmail());
 
-        if(!passwordEncoder.matches(user.getPassword(), newUser.getPassword())
-        && !Objects.equals(user.getPassword(),newUser.getPassword())
-        && !Objects.equals(user.getPassword(),null))
+        if(passwordsDontMatch(user.getPassword(), newUser.getPassword()))
         { newUser.setPassword(passwordEncoder.encode(user.getPassword())); }
-
-        System.out.println(user.getPassword());
-        System.out.println(newUser.getPassword());
         newUser.setEnabled(user.isEnabled());
         newUser.setRoles(user.getRoles());
         userRepository.save(newUser);
+    }
+
+    private boolean passwordsDontMatch(String password , String newPassword ) {
+        return !passwordEncoder.matches(password, newPassword)
+        && !Objects.equals(password, newPassword)
+        && !Objects.equals(password,null)
+        && !Objects.equals(password,"");
     }
 
     @Override
@@ -105,13 +112,30 @@ private final EmailSender emailSender;
         return new MyUserDetails(loggedUser);
     }
 
-
-        @Override
+     @Override
         public boolean emailExists(String email){
             return userRepository.findAll().stream()
                     .anyMatch(user->user.getEmail()
                             .equals(email));
 }
+
+    @Override
+    public void changePassword(User currentUser, User modelUser, String newPassword) throws ChangePasswordException {
+          if(!passwordEncoder.matches(modelUser.getPassword(), currentUser.getPassword())){
+              throw new ChangePasswordException("Current password don't match");
+        }
+            if(passwordEncoder.matches(newPassword, currentUser.getPassword())){
+                throw new ChangePasswordException("New password must differ from the current one!");
+            }
+            if(Strings.isNullOrEmpty(newPassword)){
+                throw new ChangePasswordException("Password must not be empty!");
+            }
+            if(Objects.equals(modelUser.getRpassword(),newPassword)){
+            currentUser.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(currentUser);}
+          else
+              throw new SignUpException("Passwords don't match!");
+    }
 
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +

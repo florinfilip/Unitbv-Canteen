@@ -19,14 +19,14 @@
 </div>
 <br><br><br><br>
 <div class="admin-container" align="center">
-    <a th:href="${'/users'}"> Edit Users </a>
+    <a th:href="${'/users'}"><h4>Edit Users</h4> </a>
     <br>
-    <a th:href="${'/admin/export'}">Download Menu Information</a>
+    <a th:href="${'/admin/export'}"><h4>Download Menu Information</h4></a>
     <br>
     <form th:action="@{/admin/import}" method="post" enctype="multipart/form-data">  
-        <br>
+       <h5> <br>
         Import menus: <input type="file" name="file"/><br><br>
-        <input class="btnUploadMessage" type="submit" value="Upload File"/>  
+           <input class="btnUploadMessage" type="submit" value="Upload File"/>  </h5>
         <br><br><br>
         </form>
 </div>

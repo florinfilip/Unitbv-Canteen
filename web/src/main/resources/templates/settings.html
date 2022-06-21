@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ,
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:text-align="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" th:href="@{/styles/settingsStyle.css}" href="../static/styles/style.css">
+</head>
+
+<body>
+<div th:align="center" class="background-opacity">
+
+
+
+<th:block>
+<table class="table">
+    <thead class="thead-dark">
+      <tr><h3>User  Details</h3>
+        <th scope="col"></th>
+          <th style="text-align:center" scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+
+    <tr>
+        <td style="text-align:left"> <h5><a><b>Password</b></a></h5></td>
+        <td style="text-align:center"></td>
+        <td style="text-align:right"><h5><button class="settingBtn" id="myBtn"> Change Password</button></h5></td>
+    </tr>
+
+
+</table>
+</th:block>
+
+    <div id="passwordModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span th:align="right" class="close">&times;</span>
+            <form th:action="@{/settings/changePass}" method="post"
+                  style="max-width:600px; margin: 0 auto;"
+                  th:object="${basicUser}">
+                <div th:align="center"><h3>Change your password</h3></div>
+                <br>
+             <div class="form-group row">
+                <label class="col-form-label col-4">Current Password</label>
+                <div class="col-8">
+                    <input
+                            type="password"
+                            name="password"
+                            placeholder="Current Password"
+                            class="form-control"/>
+                    <br>
+                </div>
+                <label class="col-form-label col-4">New Password</label>
+                <div class="col-8">
+                    <input
+                            type="password"
+                            id="newPassword"
+                            name="newPassword"
+                            placeholder="Password"
+                            class="form-control"/>
+                    <br>
+                </div>
+                <label class="col-form-label col-4">Repeat New Password</label>
+                <div class="col-8">
+                  <input
+                        type="password"
+                        name="rpassword"
+                        placeholder="Repeat Password"
+                        class="form-control"/>
+                  <br>
+                </div>
+             </div>
+                <span th:align="center"
+                      class="text-danger" th:if="${errorMessage}"
+                      th:text="${errorMessage}">Error
+                </span>
+                <br>
+                <br>
+                <button th:align="center" class="btn btn-primary" type="submit" th:value="Update">Update</button>
+            </form>
+        </div>
+    </div>
+
+
+<a th:href="${'/home'}">
+    <input type="button" class="homeBtn bg-warning bg-gradient btn-lg btn-primary"
+           th:value="Back"/></a>
+
+
+
+</div>
+
+<script>
+    // Get the modal
+    var passModal = document.getElementById("passwordModal");
+
+
+
+    // Get the button that opens the modal
+    var passBtn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    passBtn.onclick = function() {
+        passModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        passModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == passModal) {
+            passModal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
