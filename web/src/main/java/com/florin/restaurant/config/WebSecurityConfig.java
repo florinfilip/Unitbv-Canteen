@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/delete").hasAuthority(ADMIN)
                 .mvcMatchers("/admin").hasAuthority(ADMIN)
                 .mvcMatchers("/users").hasAuthority(ADMIN)
+                .mvcMatchers("edit-menus").hasAuthority(ADMIN)
                 .mvcMatchers("/register").permitAll()
                 .anyRequest().permitAll()
                 .and()

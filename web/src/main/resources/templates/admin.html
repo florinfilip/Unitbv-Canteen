@@ -5,6 +5,7 @@
 <head>
     <title>Admin</title>
     <link rel="stylesheet" th:href="@{/styles/adminStyle.css}" href="../static/styles/style.css">
+
 </head>
 
 <body>
@@ -21,14 +22,16 @@
 <div class="admin-container" align="center">
     <a th:href="${'/users'}"><h4>Edit Users</h4> </a>
     <br>
-    <a th:href="${'/admin/export'}"><h4>Download Menu Information</h4></a>
+    <a th:href="${'/edit-menus'}"><h4>Edit Menus</h4> </a>
     <br>
-    <form th:action="@{/admin/import}" method="post" enctype="multipart/form-data">  
-       <h5> <br>
-        Import menus: <input type="file" name="file"/><br><br>
-           <input class="btnUploadMessage" type="submit" value="Upload File"/>  </h5>
-        <br><br><br>
-        </form>
+<!--    <a th:href="${'/admin/export'}"><h4>Download Menu Information</h4></a>-->
+<!--    <br>-->
+<!--    <form th:action="@{/admin/import}" method="post" enctype="multipart/form-data">  -->
+<!--       <h5> <br>-->
+<!--        Import menus: <input type="file" name="file"/><br><br>-->
+<!--           <input class="btnUploadMessage" type="submit" value="Upload File"/>  </h5>-->
+<!--        <br><br><br>-->
+<!--        </form>-->
 </div>
 
 

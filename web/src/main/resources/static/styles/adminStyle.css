@@ -1,9 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
 
-body{font-family: 'Sansita Swashed', cursive;
-   background-image: url("../pics/background.jpg");
+html{
    height: 100%;
-   margin:0 auto;
+}
+body{font-family: 'Sansita Swashed', cursive;
+   background: url("../pics/background.jpg");
+   min-height: 100%;
+   width: 100%;
+   background-size: cover;
+   height: 100vh;
+   overflow: hidden;
 }
 
 .admin-container{
@@ -17,5 +23,4 @@ a{
 }
 .background-opacity{
    background-color: rgba(204, 204, 204, 0.91);
-
 }

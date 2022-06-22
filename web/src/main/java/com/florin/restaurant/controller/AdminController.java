@@ -58,6 +58,6 @@ private final FileUploadService fileUploadService;
         fileUploadService.uploadFile(file);
         model.addAttribute("importer",excelImporter);
         System.out.println(excelImporter.canUpload(file));
-        return REDIRECT+"admin";
+        return REDIRECT+"edit-menus";
     }
 }

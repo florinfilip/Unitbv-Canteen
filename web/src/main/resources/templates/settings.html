@@ -16,7 +16,7 @@
 
 
 <th:block>
-<table class="table">
+<table class="table table-light">
     <thead class="thead-dark">
       <tr><h3>User  Details</h3>
         <th scope="col"></th>
@@ -27,7 +27,10 @@
 
     <tr>
         <td style="text-align:left"> <h5><a><b>Password</b></a></h5></td>
-        <td style="text-align:center"></td>
+        <td style="text-align:center"><span th:align="right"
+                                            class="text-danger" th:if="${errorMessage}"
+                                            th:text="${errorMessage}">Error
+                </span></td>
         <td style="text-align:right"><h5><button class="settingBtn" id="myBtn"> Change Password</button></h5></td>
     </tr>
 
@@ -74,10 +77,7 @@
                   <br>
                 </div>
              </div>
-                <span th:align="center"
-                      class="text-danger" th:if="${errorMessage}"
-                      th:text="${errorMessage}">Error
-                </span>
+
                 <br>
                 <br>
                 <button th:align="center" class="btn btn-primary" type="submit" th:value="Update">Update</button>
@@ -97,8 +97,6 @@
 <script>
     // Get the modal
     var passModal = document.getElementById("passwordModal");
-
-
 
     // Get the button that opens the modal
     var passBtn = document.getElementById("myBtn");

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/styles/edit-menus.css}" href="../static/styles/style.css">
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<div class="background-opacity">
+  <div th:align="center"><h2>Menus</h2></div>
+
+    <table  class="table table-light table-striped table-hover table-sm" th:if="${ not#lists.isEmpty(menus)}">
+        <thead class="thead-dark">
+        <tr><th scope="col">Id</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Description</th>
+            <th scope="col">Photo URL</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+
+        <th:block th:each="menu : ${menus}">
+
+            <tr>
+                <td><a  th:text="${menu.id}"> ID</a></td>
+                <td><a  th:text="${menu.name}"> Menu</a></td>
+                <td><a  th:text="${menu.description}"> Description</a></td>
+                <td th:text="${menu.url}">URL</td>
+                <td th:text="${menu.price}">Price </td>
+                <td>
+
+                    <form th:action="@{'/menu/{id}' (id=${menu.id})}" th:method="get">
+                        <button th:href="@{/edit-menus/}+${menu.id}" class="btn page-link "  type="submit" >
+                            <b>EDIT</b>
+                        </button></form>
+                    <br>
+                    <form th:action="@{'/edit-menus/delete/{id}' (id=${menu.id})}" th:method="delete">
+                        <button th:href="@{/edit-menus/delete}+${menu.id}" class="btn  btn-danger">DELETE
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
+        </th:block>
+    </table>
+
+<div th:align="center" class="menu-info">
+        <a th:href="${'/admin/export'}" id="downloadMenu"><h4>Download Menu Information</h4></a>
+
+         <form th:action="@{/admin/import}" method="post" enctype="multipart/form-data">
+            <h5>
+                <br>
+                Import menus: <input type="file" name="file"/><br><br>
+                <input class="btnUploadMessage"
+                       type="submit"
+                       value="Upload File"/>
+            </h5>
+        </form>
+</div>
+<div >
+    <a th:href="${'/admin'}">
+        <input th:align="left" type="button"
+               class="bg-warning bg-gradient btn-lg btn-primary"
+               th:value="Back"/></a>
+</div>
+
+
+</div>
+</body>
+</html>
