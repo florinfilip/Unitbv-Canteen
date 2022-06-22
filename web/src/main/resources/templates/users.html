@@ -3,15 +3,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
 <head>
+    <link rel="stylesheet" th:href="@{/styles/usersStyle.css}" href="../static/styles/style.css">
     <meta charset="UTF-8">
     <title>Users</title>
 </head>
 <body>
+<div class="background-opacity">
+    <div th:align="center"><h2>Users</h2></div>
 
-<div align ="center">
 
-    <h2>Users</h2>
-    <table  class="table" th:if="${ not#lists.isEmpty(users)}">
+    <table  class="table table-light table-striped table-hover" th:if="${ not#lists.isEmpty(users)}">
         <thead class="thead-dark">
              <tr><th scope="col">Id</th>
                  <th scope="col">First Name</th>
@@ -24,7 +25,6 @@
         </thead>
 
         <th:block th:each="user : ${users}">
-
             <tr>
                 <td><a  th:text="${user.id}"> ID</a></td>
                 <td><a  th:text="${user.firstName}"> FirstName</a></td>
@@ -49,9 +49,11 @@
             </tr>
         </th:block>
     </table>
+<div class="background-opacity">
+<a th:href="${'/admin'}">
+    <input id="backBtn" type="button" class="bg-warning bg-gradient btn-lg btn-primary"
+           th:value="Back"/></a>
 </div>
-
-
-<a th:text="HOME" th:href="${'/admin'}"/>
-
-
+</div>
+</body>
+</html>

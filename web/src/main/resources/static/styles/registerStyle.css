@@ -1,6 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
 
 
-body{font-family: 'Sansita Swashed', cursive;
+html,body{font-family: 'Sansita Swashed', cursive;
    background-image: url("../pics/background.jpg");
+   height: 100vh;
+}
+.floating-left-bottom-btn {
+   transition: all 0.5s;
+   position: absolute;
+   left: 10px;
+   bottom: 16px;
+   cursor: pointer;
+   background-color: coral;
+   border-color: coral;
+}
+.floating-left-bottom-btn:hover {
+   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+   cursor: pointer;
+   position: absolute;
+   bottom:10px;
+   left:10px;
+   /*display: inline-block;*/
+   transition: 0.5s;
+   color: rgba(35, 26, 7, 0.98);
+   background-color: #50d6ff;
+   border-color: #50d6ff;
+   border-radius: 20px;
 }

@@ -16,7 +16,8 @@ a{
    color:black;
 }
 .background-opacity{
-   margin: 0 auto;
+   background-color: rgba(0, 0, 0, 0.93);
+   color: white;
 }
 
 .settingBtn{
@@ -28,15 +29,13 @@ a{
    bottom: 10px;
    left: 10px;
 }
-settingBtn:hover{
-   color: rgba(0, 3, 7, 0.78)
+.settingBtn{
+   color: rgba(245, 247, 250, 0.78)
 }
 
 #myBtn{
 
 }
-
-
 
 .modal {
    display: none;
@@ -54,7 +53,8 @@ settingBtn:hover{
 
 /* Modal Content */
 .modal-content {
-   background-color: #fefefe;
+   color: black;
+   background-color: rgba(255, 255, 255, 0.85);
    margin: auto;
    padding: 20px;
    border: 1px solid #888;
