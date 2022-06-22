@@ -9,9 +9,12 @@ body{font-family: 'Sansita Swashed', cursive;
    width: 100%;
    background-size: cover;
    height: 100vh;
-   overflow: hidden;
 }
-
+#backBtn{
+ position: absolute;
+   bottom: 10px;
+   left: 10px;
+}
 .admin-container{
    height: 490px;
 }
@@ -23,4 +26,5 @@ a{
 }
 .background-opacity{
    background-color: rgba(204, 204, 204, 0.91);
+   height: 100vh;
 }
