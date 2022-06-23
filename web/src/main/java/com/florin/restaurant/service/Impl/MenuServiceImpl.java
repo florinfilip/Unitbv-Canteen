@@ -34,7 +34,7 @@ Menu savedMenu = getMenuById(menu.getId());
 savedMenu.setName(Optional.ofNullable(menu.getName()).orElse(savedMenu.getName()));
 savedMenu.setDescription(Optional.ofNullable(menu.getDescription()).orElse(savedMenu.getDescription()));
 savedMenu.setUrl(Optional.ofNullable(menu.getUrl()).orElse(savedMenu.getUrl()));
-
+savedMenu.setPrice(Optional.ofNullable(menu.getPrice()).orElse((savedMenu.getPrice())));
 return menuRepository.save(savedMenu);
     }
 
@@ -42,13 +42,10 @@ return menuRepository.save(savedMenu);
     public void deleteMenu(int menuId) {
         Menu menu = getMenuById(menuId);
         menuRepository.delete(menu);
-
     }
-
 
     @Override
     public List<Menu> getMenus() {
-
         return menuRepository.findAll();
     }
 }

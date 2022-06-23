@@ -33,7 +33,6 @@ public class GameController {
     public String play(Model model,
                        @AuthenticationPrincipal Authentication authentication){
         User loggedUser = userDetailsService.getCurrentlyLoggedUser(authentication).getUser();
-
         model.addAttribute(MAIN_MESSAGE, gameService.getMainMessage(loggedUser));
         model.addAttribute(RESULT_MESSAGE, gameService.getResultMessage());
         model.addAttribute(GAME_SERVICE, gameService);

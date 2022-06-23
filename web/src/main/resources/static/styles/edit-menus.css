@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme:wght@300;400&display=swap');
+
+html,body{min-height: fit-content;
+    background: url("../pics/background.jpg") no-repeat;
+margin-inline: 0;
+    background-size: cover;
+    font-family:"Acme", cursive;
+
+
+}
+.menu-info{
+   height: fit-content;
+    min-height: 37vh;
+}
+
+.background-opacity{
+    color: white;
+    background-color: rgba(2, 15, 30, 0.93);
+}

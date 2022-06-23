@@ -67,7 +67,6 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
        width="30"
        height="30"
        id="logo"/>
-
     </a>
      <a class="d-none d-lg-block navbar-brand mb-0 h1">UnitBv Canteen</a>
 
@@ -84,8 +83,6 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             </li>
         </li>
     </ul>
-
-
          <ul id="userNavBar" class="navbar-nav mx-auto">
 
             <li class="nav-item dropdown">
@@ -105,8 +102,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         <a sec:authorize="hasAuthority('USER')"th:href="${'/settings'}">
                             <button class="dropdown-item" type="submit">Settings</button></a>
                     </li>
-                   
-        
+                </ul>
+            </li>
+         </ul>
 </div>
 </nav>
 

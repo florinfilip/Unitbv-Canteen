@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static com.florin.restaurant.util.AttributeNames.GAME_SERVICE;
@@ -35,5 +36,10 @@ private final MyUserDetailsService userDetailsService;
         model.addAttribute("user", userDetailsService.loadUserByUsername(loggedUser.getEmail()));
 
           return HOME;
+    }
+
+    @PostMapping("reset")
+    public void reset(){
+        gameService.reset();
     }
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Edit Menu</h1>
+    </div>
+
+<form th:action="@{/edit-menus/save}" method="post"
+      style="max-width:600px; margin: 0 auto;"
+      th:object="${menu}">
+    <input class="form-control" hidden type="text" th:value="${menu.id}" th:field="*{id}"/>
+    <div class="m-3">
+        <div class="form-group row">
+            <label class="col-form-label col-4">Menu Name</label>
+            <div class="col-8">
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       placeholder="Menu's Name"
+                       th:field="*{name}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Description</label>
+            <div class="col-8">
+                <input type="text"
+                       name="description"
+                       class="form-control"
+                       placeholder="Description"
+                       th:field="*{description}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-4">Image URL</label>
+            <div class="col-8">
+                <input 
+                type="text"
+                name="url"
+                th:field="*{url}"
+                placeholder="Enter New URL"
+                class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-4">Price</label>
+            <div class="col-8">
+                <input 
+                type="text"
+                name="price"
+                th:field="*{price}"
+                placeholder="Enter Here A New Password If Desired" 
+                class="form-control"/>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary" href="#" type="submit" th:value="Update">Update</button>
+    </div>
+</div>
+</form>
+
+</div>
+
+</body>
+</html>
