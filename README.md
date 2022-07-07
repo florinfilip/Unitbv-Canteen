@@ -57,8 +57,8 @@ Main concepts used:
 <hr>
 
 Upcoming features: 
-- Code Generator for a random discount/free delivery
-- Email sign up verification
+- Code Generator for a random discount/free delivery (RE: Implemented)
+- Email sign up verification (RE: Implemented) 
 - Angular front end
 
 
