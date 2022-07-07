@@ -1,4 +1,4 @@
-# restaurant
+# Unitbv Canteen Platform
 Personal Project
 
 
